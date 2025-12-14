@@ -1,0 +1,55 @@
+name: PowerMining
+version: ${project.version}
+main: de.andidoescode.powermining.PowerMining
+api-version: "1.21"
+description: Enhanced mining experience with mounted mining, magnet hoppers, and ore scanner bells
+author: AndiDoesCode
+website: https://github.com/andidoescode/power-mining
+
+commands:
+  givemagnethopper:
+    description: Give a Magnet Hopper to a player
+    usage: /givemagnethopper [player] [radius]
+    permission: powermining.give.magnethopper
+    aliases: [gmh, magnethopper]
+  giveorescannerbell:
+    description: Give an Ore Scanner Bell to a player
+    usage: /giveorescannerbell [player] [radius]
+    permission: powermining.give.orescannerbell
+    aliases: [gosb, orescannerbell]
+
+permissions:
+  powermining.*:
+    description: Full access to Power Mining
+    default: op
+    children:
+      powermining.use.*: true
+      powermining.give.*: true
+  powermining.use.*:
+    description: Use all Power Mining features
+    default: true
+    children:
+      powermining.use.mountedmining: true
+      powermining.use.magnethopper: true
+      powermining.use.orescannerbell: true
+  powermining.use.mountedmining:
+    description: Use mounted mining feature
+    default: true
+  powermining.use.magnethopper:
+    description: Use magnet hopper feature
+    default: true
+  powermining.use.orescannerbell:
+    description: Use ore scanner bell feature
+    default: true
+  powermining.give.*:
+    description: Give Power Mining items
+    default: op
+    children:
+      powermining.give.magnethopper: true
+      powermining.give.orescannerbell: true
+  powermining.give.magnethopper:
+    description: Give magnet hoppers
+    default: op
+  powermining.give.orescannerbell:
+    description: Give ore scanner bells
+    default: op

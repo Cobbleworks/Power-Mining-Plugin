@@ -1,0 +1,74 @@
+# Power Mining Configuration
+
+# Mounted Mining Settings
+mounted-mining:
+  enabled: true
+  # Mining area dimensions (blocks in each direction from center)
+  # 3x3x3 means 1 block in each direction = 3 total per axis
+  radius-x: 1
+  radius-y: 1
+  radius-z: 1
+  # How often to mine (in ticks, 20 ticks = 1 second)
+  mining-interval: 5
+  # Y offset to prevent mining below the mount (positive = higher)
+  y-offset: 1
+
+# Magnet Hopper Settings
+magnet-hopper:
+  enabled: true
+  # Default attraction radius in blocks
+  default-radius: 8
+  # Maximum allowed radius
+  max-radius: 32
+  # How often to attract items (in ticks)
+  attraction-interval: 5
+  # Item attraction speed (blocks per tick)
+  attraction-speed: 0.5
+  # Particle effect settings
+  particles:
+    enabled: true
+    type: SOUL_FIRE_FLAME
+    count: 3
+    interval: 10
+
+# Ore Scanner Bell Settings
+ore-scanner-bell:
+  enabled: true
+  # Default scanning radius in blocks
+  default-radius: 16
+  # Maximum allowed radius
+  max-radius: 64
+  # How long ores stay highlighted (in seconds)
+  highlight-duration: 10
+  # Cooldown between uses (in seconds)
+  cooldown: 30
+  # List of blocks that count as ores
+  ore-types:
+    - COAL_ORE
+    - DEEPSLATE_COAL_ORE
+    - IRON_ORE
+    - DEEPSLATE_IRON_ORE
+    - COPPER_ORE
+    - DEEPSLATE_COPPER_ORE
+    - GOLD_ORE
+    - DEEPSLATE_GOLD_ORE
+    - REDSTONE_ORE
+    - DEEPSLATE_REDSTONE_ORE
+    - EMERALD_ORE
+    - DEEPSLATE_EMERALD_ORE
+    - LAPIS_ORE
+    - DEEPSLATE_LAPIS_ORE
+    - DIAMOND_ORE
+    - DEEPSLATE_DIAMOND_ORE
+    - NETHER_GOLD_ORE
+    - NETHER_QUARTZ_ORE
+    - ANCIENT_DEBRIS
+
+# Messages (supports MiniMessage format)
+messages:
+  magnet-hopper-given: "<green>You received a <gold>Magnet Hopper</gold> with radius <yellow>{radius}</yellow>!</green>"
+  ore-scanner-bell-given: "<green>You received an <gold>Ore Scanner Bell</gold> with radius <yellow>{radius}</yellow>!</green>"
+  ore-scanner-cooldown: "<red>Ore Scanner is on cooldown! <yellow>{seconds}</yellow> seconds remaining.</red>"
+  ore-scanner-found: "<green>Found <yellow>{count}</yellow> ores nearby!</green>"
+  ore-scanner-none-found: "<yellow>No ores found in range.</yellow>"
+  no-permission: "<red>You don't have permission to do that!</red>"
