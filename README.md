@@ -2,7 +2,7 @@
 
 ![Power Mining Icon](placeholder-icon.png)
 
-A Minecraft Paper plugin that enhances the mining experience with three powerful features: mounted mining, magnet hoppers, and ore scanner bells.
+A Minecraft Paper plugin that enhances the mining experience with powerful features: mounted mining, magnet hoppers, ore scanner bells, miner's helmet, and escape ropes.
 
 ## Features
 
@@ -45,14 +45,38 @@ A placeable bell that reveals all ores in a customizable radius when activated!
 
 **Command:** `/pm orebell [player] [radius] [--filter ORE_TYPE] [--duration TICKS]`
 
+### ⛑️ Miner's Helmet
+
+A special gold helmet that grants night vision when worn!
+
+- **Automatic effect:** Night vision is applied automatically when wearing the helmet
+- **No potions needed:** Perfect for mining in dark caves without carrying potions
+- **Persistent effect:** Effect stays active as long as the helmet is worn
+
+**Command:** `/pm helmet [player]`
+
+### 🪢 Escape Rope
+
+A magical lead item that remembers a location and teleports you back!
+
+- **Set return point:** Right-click on a block to remember that location
+- **Visual feedback:** Item name and lore update to show the saved coordinates
+- **Teleport back:** Right-click in the air to teleport back to the saved location
+- **Single use:** The escape rope is consumed when you teleport
+- **Particle effects:** Beautiful portal particles on teleportation
+
+**Command:** `/pm escaperope [player]`
+
 ## Commands
 
-| Command                                            | Aliases     | Description              |
-| -------------------------------------------------- | ----------- | ------------------------ |
-| `/powermining magnethopper [player] [radius]`      | `/pm mh`    | Give a Magnet Hopper     |
-| `/powermining orebell [player] [radius] [options]` | `/pm ob`    | Give an Ore Scanner Bell |
-| `/powermining drill`                               | `/pm drill` | Show mounted mining help |
-| `/powermining help`                                | `/pm help`  | Show all commands        |
+| Command                                            | Aliases        | Description              |
+| -------------------------------------------------- | -------------- | ------------------------ |
+| `/powermining magnethopper [player] [radius]`      | `/pm mh`       | Give a Magnet Hopper     |
+| `/powermining orebell [player] [radius] [options]` | `/pm ob`       | Give an Ore Scanner Bell |
+| `/powermining helmet [player]`                     | `/pm helmet`   | Give a Miner's Helmet    |
+| `/powermining escaperope [player]`                 | `/pm rope, er` | Give an Escape Rope      |
+| `/powermining drill`                               | `/pm drill`    | Show mounted mining help |
+| `/powermining help`                                | `/pm help`     | Show all commands        |
 
 ### Ore Bell Options
 
@@ -68,9 +92,13 @@ A placeable bell that reveals all ores in a customizable radius when activated!
 | `powermining.use.mountedmining`   | Use mounted mining            | true    |
 | `powermining.use.magnethopper`    | Use magnet hoppers            | true    |
 | `powermining.use.orescannerbell`  | Use ore scanner bells         | true    |
+| `powermining.use.minershelmet`    | Use miner's helmets           | true    |
+| `powermining.use.escaperope`      | Use escape ropes              | true    |
 | `powermining.give.*`              | Give Power Mining items       | op      |
 | `powermining.give.magnethopper`   | Give magnet hoppers           | op      |
 | `powermining.give.orescannerbell` | Give ore scanner bells        | op      |
+| `powermining.give.minershelmet`   | Give miner's helmets          | op      |
+| `powermining.give.escaperope`     | Give escape ropes             | op      |
 
 ## Configuration
 
@@ -108,6 +136,14 @@ ore-scanner-bell:
     - DIAMOND_ORE
     - IRON_ORE
     # ... and more
+
+# Miner's Helmet Settings
+miners-helmet:
+  enabled: true
+
+# Escape Rope Settings
+escape-rope:
+  enabled: true
 ```
 
 ## Installation

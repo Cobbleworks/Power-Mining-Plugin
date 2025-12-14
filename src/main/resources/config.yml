@@ -64,6 +64,14 @@ ore-scanner-bell:
     - NETHER_QUARTZ_ORE
     - ANCIENT_DEBRIS
 
+# Miner's Helmet Settings
+miners-helmet:
+  enabled: true
+
+# Escape Rope Settings
+escape-rope:
+  enabled: true
+
 # Messages (supports MiniMessage format)
 messages:
   magnet-hopper-given: "<green>You received a <gold>Magnet Hopper</gold> with radius <yellow>{radius}</yellow>!</green>"
@@ -71,4 +79,10 @@ messages:
   ore-scanner-cooldown: "<red>Ore Scanner is on cooldown! <yellow>{seconds}</yellow> seconds remaining.</red>"
   ore-scanner-found: "<green>Found <yellow>{count}</yellow> ores nearby!</green>"
   ore-scanner-none-found: "<yellow>No ores found in range.</yellow>"
+  miners-helmet-given: "<green>You received a <gold>Miner's Helmet</gold>! Wear it for night vision.</green>"
+  escape-rope-given: "<green>You received an <light_purple>Escape Rope</light_purple>! Right-click a block to set return point.</green>"
+  escape-rope-set: "<green>Return point set! Right-click in the air to teleport back.</green>"
+  escape-rope-teleport: "<green>Whoosh! You've been teleported back to your return point!</green>"
+  escape-rope-no-point: "<red>No return point set! Right-click a block first.</red>"
+  escape-rope-invalid: "<red>Return point is no longer valid!</red>"
   no-permission: "<red>You don't have permission to do that!</red>"

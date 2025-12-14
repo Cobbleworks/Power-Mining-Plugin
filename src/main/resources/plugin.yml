@@ -27,6 +27,8 @@ permissions:
       powermining.use.mountedmining: true
       powermining.use.magnethopper: true
       powermining.use.orescannerbell: true
+      powermining.use.minershelmet: true
+      powermining.use.escaperope: true
   powermining.use.mountedmining:
     description: Use mounted mining feature
     default: true
@@ -36,15 +38,29 @@ permissions:
   powermining.use.orescannerbell:
     description: Use ore scanner bell feature
     default: true
+  powermining.use.minershelmet:
+    description: Use miner's helmet feature
+    default: true
+  powermining.use.escaperope:
+    description: Use escape rope feature
+    default: true
   powermining.give.*:
     description: Give Power Mining items
     default: op
     children:
       powermining.give.magnethopper: true
       powermining.give.orescannerbell: true
+      powermining.give.minershelmet: true
+      powermining.give.escaperope: true
   powermining.give.magnethopper:
     description: Give magnet hoppers
     default: op
   powermining.give.orescannerbell:
     description: Give ore scanner bells
+    default: op
+  powermining.give.minershelmet:
+    description: Give miner's helmets
+    default: op
+  powermining.give.escaperope:
+    description: Give escape ropes
     default: op

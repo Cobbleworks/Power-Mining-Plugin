@@ -41,6 +41,8 @@ public class PowerMiningCommand implements CommandExecutor, TabCompleter {
         return switch (subCommand) {
             case "magnethopper", "mh" -> handleMagnetHopper(sender, subArgs);
             case "orebell", "ob" -> handleOreBell(sender, subArgs);
+            case "helmet", "minershelmet" -> handleMinersHelmet(sender, subArgs);
+            case "escaperope", "rope", "er" -> handleEscapeRope(sender, subArgs);
             case "drill" -> handleDrill(sender);
             case "help" -> {
                 sendHelp(sender);
@@ -72,6 +74,20 @@ public class PowerMiningCommand implements CommandExecutor, TabCompleter {
             .append(Component.text("[player] [radius] [--filter ORE] [--duration TICKS]")
                 .color(NamedTextColor.GRAY))
             .append(Component.text(" - Give an Ore Scanner Bell")
+                .color(NamedTextColor.WHITE)));
+        
+        sender.sendMessage(Component.text("/pm helmet ")
+            .color(NamedTextColor.YELLOW)
+            .append(Component.text("[player]")
+                .color(NamedTextColor.GRAY))
+            .append(Component.text(" - Give a Miner's Helmet")
+                .color(NamedTextColor.WHITE)));
+        
+        sender.sendMessage(Component.text("/pm escaperope ")
+            .color(NamedTextColor.YELLOW)
+            .append(Component.text("[player]")
+                .color(NamedTextColor.GRAY))
+            .append(Component.text(" - Give an Escape Rope")
                 .color(NamedTextColor.WHITE)));
         
         sender.sendMessage(Component.text("/pm drill")
@@ -216,6 +232,80 @@ public class PowerMiningCommand implements CommandExecutor, TabCompleter {
         return true;
     }
 
+    private boolean handleMinersHelmet(CommandSender sender, String[] args) {
+        if (!sender.hasPermission("powermining.give.minershelmet")) {
+            String noPermMsg = plugin.getConfig().getString("messages.no-permission", "<red>You don't have permission to do that!</red>");
+            sender.sendMessage(miniMessage.deserialize(noPermMsg));
+            return true;
+        }
+
+        Player target;
+
+        if (args.length == 0) {
+            if (!(sender instanceof Player player)) {
+                sender.sendMessage(miniMessage.deserialize("<red>Console must specify a player!</red>"));
+                return true;
+            }
+            target = player;
+        } else {
+            target = Bukkit.getPlayer(args[0]);
+            if (target == null) {
+                sender.sendMessage(miniMessage.deserialize("<red>Player not found: " + args[0] + "</red>"));
+                return true;
+            }
+        }
+
+        var minersHelmet = plugin.getMinersHelmetManager().createMinersHelmet();
+        target.getInventory().addItem(minersHelmet);
+        
+        String givenMsg = plugin.getConfig().getString("messages.miners-helmet-given", 
+            "<green>You received a <gold>Miner's Helmet</gold>! Wear it for night vision.</green>");
+        target.sendMessage(miniMessage.deserialize(givenMsg));
+        
+        if (sender != target) {
+            sender.sendMessage(miniMessage.deserialize("<green>Gave Miner's Helmet to " + target.getName() + "!</green>"));
+        }
+
+        return true;
+    }
+
+    private boolean handleEscapeRope(CommandSender sender, String[] args) {
+        if (!sender.hasPermission("powermining.give.escaperope")) {
+            String noPermMsg = plugin.getConfig().getString("messages.no-permission", "<red>You don't have permission to do that!</red>");
+            sender.sendMessage(miniMessage.deserialize(noPermMsg));
+            return true;
+        }
+
+        Player target;
+
+        if (args.length == 0) {
+            if (!(sender instanceof Player player)) {
+                sender.sendMessage(miniMessage.deserialize("<red>Console must specify a player!</red>"));
+                return true;
+            }
+            target = player;
+        } else {
+            target = Bukkit.getPlayer(args[0]);
+            if (target == null) {
+                sender.sendMessage(miniMessage.deserialize("<red>Player not found: " + args[0] + "</red>"));
+                return true;
+            }
+        }
+
+        var escapeRope = plugin.getEscapeRopeManager().createEscapeRope();
+        target.getInventory().addItem(escapeRope);
+        
+        String givenMsg = plugin.getConfig().getString("messages.escape-rope-given", 
+            "<green>You received an <light_purple>Escape Rope</light_purple>! Right-click a block to set return point.</green>");
+        target.sendMessage(miniMessage.deserialize(givenMsg));
+        
+        if (sender != target) {
+            sender.sendMessage(miniMessage.deserialize("<green>Gave Escape Rope to " + target.getName() + "!</green>"));
+        }
+
+        return true;
+    }
+
     private boolean handleDrill(CommandSender sender) {
         sender.sendMessage(Component.empty());
         sender.sendMessage(Component.text("═══ Mounted Mining (Drill) ═══")
@@ -262,14 +352,16 @@ public class PowerMiningCommand implements CommandExecutor, TabCompleter {
         
         if (args.length == 1) {
             String partial = args[0].toLowerCase();
-            List<String> subCommands = Arrays.asList("magnethopper", "orebell", "drill", "help");
+            List<String> subCommands = Arrays.asList("magnethopper", "orebell", "helmet", "escaperope", "drill", "help");
             completions = subCommands.stream()
                 .filter(cmd -> cmd.startsWith(partial))
                 .collect(Collectors.toList());
         } else if (args.length == 2) {
             String subCommand = args[0].toLowerCase();
             if (subCommand.equals("magnethopper") || subCommand.equals("mh") || 
-                subCommand.equals("orebell") || subCommand.equals("ob")) {
+                subCommand.equals("orebell") || subCommand.equals("ob") ||
+                subCommand.equals("helmet") || subCommand.equals("minershelmet") ||
+                subCommand.equals("escaperope") || subCommand.equals("rope") || subCommand.equals("er")) {
                 String partial = args[1].toLowerCase();
                 completions = Bukkit.getOnlinePlayers().stream()
                     .map(Player::getName)

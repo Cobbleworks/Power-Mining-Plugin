@@ -2,7 +2,9 @@ package de.andidoescode.powermining;
 
 import de.andidoescode.powermining.commands.PowerMiningCommand;
 import de.andidoescode.powermining.listeners.MountedMiningListener;
+import de.andidoescode.powermining.managers.EscapeRopeManager;
 import de.andidoescode.powermining.managers.MagnetHopperManager;
+import de.andidoescode.powermining.managers.MinersHelmetManager;
 import de.andidoescode.powermining.managers.OreScannerBellManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,6 +14,8 @@ public class PowerMining extends JavaPlugin {
     
     private MagnetHopperManager magnetHopperManager;
     private OreScannerBellManager oreScannerBellManager;
+    private MinersHelmetManager minersHelmetManager;
+    private EscapeRopeManager escapeRopeManager;
 
     @Override
     public void onEnable() {
@@ -21,6 +25,8 @@ public class PowerMining extends JavaPlugin {
         
         magnetHopperManager = new MagnetHopperManager(this);
         oreScannerBellManager = new OreScannerBellManager(this);
+        minersHelmetManager = new MinersHelmetManager(this);
+        escapeRopeManager = new EscapeRopeManager(this);
         
         registerListeners();
         registerCommands();
@@ -36,6 +42,12 @@ public class PowerMining extends JavaPlugin {
         if (oreScannerBellManager != null) {
             oreScannerBellManager.shutdown();
         }
+        if (minersHelmetManager != null) {
+            minersHelmetManager.shutdown();
+        }
+        if (escapeRopeManager != null) {
+            escapeRopeManager.shutdown();
+        }
         
         getLogger().info("Power Mining has been disabled!");
     }
@@ -44,6 +56,8 @@ public class PowerMining extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new MountedMiningListener(this), this);
         getServer().getPluginManager().registerEvents(magnetHopperManager, this);
         getServer().getPluginManager().registerEvents(oreScannerBellManager, this);
+        getServer().getPluginManager().registerEvents(minersHelmetManager, this);
+        getServer().getPluginManager().registerEvents(escapeRopeManager, this);
     }
 
     private void registerCommands() {
@@ -65,5 +79,13 @@ public class PowerMining extends JavaPlugin {
 
     public OreScannerBellManager getOreScannerBellManager() {
         return oreScannerBellManager;
+    }
+
+    public MinersHelmetManager getMinersHelmetManager() {
+        return minersHelmetManager;
+    }
+
+    public EscapeRopeManager getEscapeRopeManager() {
+        return escapeRopeManager;
     }
 }
