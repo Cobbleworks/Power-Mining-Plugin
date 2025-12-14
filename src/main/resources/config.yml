@@ -38,8 +38,8 @@ ore-scanner-bell:
   default-radius: 16
   # Maximum allowed radius
   max-radius: 64
-  # How long ores stay highlighted (in seconds)
-  highlight-duration: 10
+  # Default highlight duration (in ticks, 20 ticks = 1 second)
+  default-duration: 60
   # Cooldown between uses (in seconds)
   cooldown: 30
   # List of blocks that count as ores

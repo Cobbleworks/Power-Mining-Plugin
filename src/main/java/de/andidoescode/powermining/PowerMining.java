@@ -1,7 +1,6 @@
 package de.andidoescode.powermining;
 
-import de.andidoescode.powermining.commands.GiveMagnetHopperCommand;
-import de.andidoescode.powermining.commands.GiveOreScannerBellCommand;
+import de.andidoescode.powermining.commands.PowerMiningCommand;
 import de.andidoescode.powermining.listeners.MountedMiningListener;
 import de.andidoescode.powermining.managers.MagnetHopperManager;
 import de.andidoescode.powermining.managers.OreScannerBellManager;
@@ -48,14 +47,11 @@ public class PowerMining extends JavaPlugin {
     }
 
     private void registerCommands() {
-        var giveMagnetHopperCommand = getCommand("givemagnethopper");
-        if (giveMagnetHopperCommand != null) {
-            giveMagnetHopperCommand.setExecutor(new GiveMagnetHopperCommand(this));
-        }
-        
-        var giveOreScannerBellCommand = getCommand("giveorescannerbell");
-        if (giveOreScannerBellCommand != null) {
-            giveOreScannerBellCommand.setExecutor(new GiveOreScannerBellCommand(this));
+        var powerMiningCommand = getCommand("powermining");
+        if (powerMiningCommand != null) {
+            var commandHandler = new PowerMiningCommand(this);
+            powerMiningCommand.setExecutor(commandHandler);
+            powerMiningCommand.setTabCompleter(commandHandler);
         }
     }
 

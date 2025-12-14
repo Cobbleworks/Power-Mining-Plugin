@@ -17,8 +17,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -35,7 +36,10 @@ public class OreScannerBellManager implements Listener {
     private final PowerMining plugin;
     private final NamespacedKey oreScannerKey;
     private final NamespacedKey radiusKey;
-    private final Map<UUID, Long> cooldowns = new HashMap<>();
+    private final NamespacedKey filterKey;
+    private final NamespacedKey durationKey;
+    private final Map<Location, OreScannerBellData> placedBells = new HashMap<>();
+    private final Map<Location, Long> bellCooldowns = new HashMap<>();
     private final Set<Material> oreTypes = new HashSet<>();
     private final List<BlockDisplay> activeDisplays = new ArrayList<>();
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
@@ -44,6 +48,8 @@ public class OreScannerBellManager implements Listener {
         this.plugin = plugin;
         this.oreScannerKey = new NamespacedKey(plugin, "ore_scanner_bell");
         this.radiusKey = new NamespacedKey(plugin, "scanner_radius");
+        this.filterKey = new NamespacedKey(plugin, "scanner_filter");
+        this.durationKey = new NamespacedKey(plugin, "scanner_duration");
         
         loadOreTypes();
     }
@@ -55,6 +61,7 @@ public class OreScannerBellManager implements Listener {
             }
         }
         activeDisplays.clear();
+        placedBells.clear();
     }
 
     private void loadOreTypes() {
@@ -90,21 +97,71 @@ public class OreScannerBellManager implements Listener {
     }
 
     @EventHandler
-    public void onPlayerInteract(PlayerInteractEvent event) {
+    public void onBlockPlace(BlockPlaceEvent event) {
         if (!plugin.getConfig().getBoolean("ore-scanner-bell.enabled", true)) {
             return;
         }
 
-        if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) {
+        ItemStack item = event.getItemInHand();
+        if (item.getType() != Material.BELL) {
             return;
         }
 
-        if (event.getHand() != EquipmentSlot.HAND) {
-            return;
-        }
-
-        ItemStack item = event.getItem();
         if (!isOreScannerBell(item)) {
+            return;
+        }
+
+        if (!event.getPlayer().hasPermission("powermining.use.orescannerbell")) {
+            return;
+        }
+
+        int radius = getRadius(item);
+        String filter = getFilter(item);
+        int duration = getDuration(item);
+        Location loc = event.getBlock().getLocation();
+        
+        placedBells.put(loc, new OreScannerBellData(radius, filter, duration));
+        
+        event.getPlayer().sendMessage(Component.text("Ore Scanner Bell placed! ")
+            .color(NamedTextColor.GREEN)
+            .append(Component.text("Right-click to scan for ores.")
+                .color(NamedTextColor.YELLOW)));
+    }
+
+    @EventHandler
+    public void onBlockBreak(BlockBreakEvent event) {
+        Location loc = event.getBlock().getLocation();
+        
+        if (placedBells.containsKey(loc)) {
+            OreScannerBellData data = placedBells.remove(loc);
+            bellCooldowns.remove(loc);
+            
+            event.setDropItems(false);
+            
+            ItemStack oreScannerBell = createOreScannerBell(data.radius, data.filter, data.duration);
+            event.getBlock().getWorld().dropItemNaturally(loc, oreScannerBell);
+        }
+    }
+
+    @EventHandler
+    public void onBellInteract(PlayerInteractEvent event) {
+        if (!plugin.getConfig().getBoolean("ore-scanner-bell.enabled", true)) {
+            return;
+        }
+
+        if (event.getAction() != Action.RIGHT_CLICK_BLOCK) {
+            return;
+        }
+
+        Block block = event.getClickedBlock();
+        if (block == null || block.getType() != Material.BELL) {
+            return;
+        }
+
+        Location bellLoc = block.getLocation();
+        OreScannerBellData bellData = placedBells.get(bellLoc);
+        
+        if (bellData == null) {
             return;
         }
 
@@ -119,27 +176,23 @@ public class OreScannerBellManager implements Listener {
         int cooldownSeconds = plugin.getConfig().getInt("ore-scanner-bell.cooldown", 30);
         long cooldownMillis = cooldownSeconds * 1000L;
         
-        Long lastUse = cooldowns.get(player.getUniqueId());
-        if (lastUse != null) {
+        Long lastUse = bellCooldowns.get(bellLoc);
+        if (lastUse != null && System.currentTimeMillis() - lastUse < cooldownMillis) {
             long remaining = (lastUse + cooldownMillis - System.currentTimeMillis()) / 1000;
-            if (remaining > 0) {
-                String cooldownMsg = plugin.getConfig().getString("messages.ore-scanner-cooldown", 
-                    "<red>Ore Scanner is on cooldown! <yellow>{seconds}</yellow> seconds remaining.</red>");
-                player.sendMessage(miniMessage.deserialize(cooldownMsg.replace("{seconds}", String.valueOf(remaining))));
-                return;
-            }
+            String cooldownMsg = plugin.getConfig().getString("messages.ore-scanner-cooldown", 
+                "<red>Ore Scanner is on cooldown! <yellow>{seconds}</yellow> seconds remaining.</red>");
+            player.sendMessage(miniMessage.deserialize(cooldownMsg.replace("{seconds}", String.valueOf(remaining))));
+            return;
         }
 
-        cooldowns.put(player.getUniqueId(), System.currentTimeMillis());
-
-        int radius = getRadius(item);
-        scanForOres(player, radius);
+        bellCooldowns.put(bellLoc, System.currentTimeMillis());
         
-        event.setCancelled(true);
+        scanForOres(bellLoc, bellData.radius, bellData.filter, bellData.duration, player);
+        
+        block.getWorld().playSound(bellLoc, org.bukkit.Sound.BLOCK_BELL_USE, 1.0f, 1.2f);
     }
 
-    private void scanForOres(Player player, int radius) {
-        Location center = player.getLocation();
+    private void scanForOres(Location center, int radius, String filter, int durationTicks, Player triggeringPlayer) {
         World world = center.getWorld();
         
         if (world == null) {
@@ -147,7 +200,24 @@ public class OreScannerBellManager implements Listener {
         }
 
         List<Location> foundOres = new ArrayList<>();
-        int highlightDuration = plugin.getConfig().getInt("ore-scanner-bell.highlight-duration", 10);
+
+        // Determine which ore types to search for
+        Set<Material> searchOres;
+        if (filter != null && !filter.isEmpty()) {
+            try {
+                Material filterMaterial = Material.valueOf(filter);
+                searchOres = Set.of(filterMaterial);
+                // Also include deepslate variant if exists
+                try {
+                    Material deepslateVariant = Material.valueOf("DEEPSLATE_" + filter);
+                    searchOres = Set.of(filterMaterial, deepslateVariant);
+                } catch (IllegalArgumentException ignored) {}
+            } catch (IllegalArgumentException e) {
+                searchOres = oreTypes;
+            }
+        } else {
+            searchOres = oreTypes;
+        }
 
         for (int x = -radius; x <= radius; x++) {
             for (int y = -radius; y <= radius; y++) {
@@ -155,34 +225,33 @@ public class OreScannerBellManager implements Listener {
                     Location loc = center.clone().add(x, y, z);
                     Block block = loc.getBlock();
                     
-                    if (oreTypes.contains(block.getType())) {
+                    if (searchOres.contains(block.getType())) {
                         foundOres.add(loc);
                     }
                 }
             }
         }
 
+        if (!foundOres.isEmpty()) {
+            highlightOres(foundOres, durationTicks);
+        }
+        
         if (foundOres.isEmpty()) {
             String noneFoundMsg = plugin.getConfig().getString("messages.ore-scanner-none-found", 
                 "<yellow>No ores found in range.</yellow>");
-            player.sendMessage(miniMessage.deserialize(noneFoundMsg));
-            return;
+            triggeringPlayer.sendMessage(miniMessage.deserialize(noneFoundMsg));
+        } else {
+            String foundMsg = plugin.getConfig().getString("messages.ore-scanner-found", 
+                "<green>Found <yellow>{count}</yellow> ores nearby!</green>");
+            triggeringPlayer.sendMessage(miniMessage.deserialize(foundMsg.replace("{count}", String.valueOf(foundOres.size()))));
         }
-
-        String foundMsg = plugin.getConfig().getString("messages.ore-scanner-found", 
-            "<green>Found <yellow>{count}</yellow> ores nearby!</green>");
-        player.sendMessage(miniMessage.deserialize(foundMsg.replace("{count}", String.valueOf(foundOres.size()))));
-
-        player.playSound(player.getLocation(), org.bukkit.Sound.BLOCK_BELL_USE, 1.0f, 1.2f);
-
-        highlightOres(player, foundOres, highlightDuration);
     }
 
-    private void highlightOres(Player player, List<Location> oreLocations, int durationSeconds) {
+    private void highlightOres(List<Location> oreLocations, int durationTicks) {
         List<BlockDisplay> displays = new ArrayList<>();
         
         for (Location loc : oreLocations) {
-            BlockDisplay display = createGlowingOutline(loc, player);
+            BlockDisplay display = createGlowingOutline(loc);
             if (display != null) {
                 displays.add(display);
                 activeDisplays.add(display);
@@ -199,10 +268,10 @@ public class OreScannerBellManager implements Listener {
                     activeDisplays.remove(display);
                 }
             }
-        }.runTaskLater(plugin, durationSeconds * 20L);
+        }.runTaskLater(plugin, durationTicks);
     }
 
-    private BlockDisplay createGlowingOutline(Location blockLoc, Player player) {
+    private BlockDisplay createGlowingOutline(Location blockLoc) {
         World world = blockLoc.getWorld();
         if (world == null) {
             return null;
@@ -248,7 +317,7 @@ public class OreScannerBellManager implements Listener {
         };
     }
 
-    public ItemStack createOreScannerBell(int radius) {
+    public ItemStack createOreScannerBell(int radius, String filter, int durationTicks) {
         int maxRadius = plugin.getConfig().getInt("ore-scanner-bell.max-radius", 64);
         radius = Math.min(radius, maxRadius);
         
@@ -263,7 +332,7 @@ public class OreScannerBellManager implements Listener {
             
             List<Component> lore = new ArrayList<>();
             lore.add(Component.empty());
-            lore.add(Component.text("✦ Right-click to scan for ores")
+            lore.add(Component.text("✦ Place and right-click to scan")
                 .color(NamedTextColor.GRAY)
                 .decoration(TextDecoration.ITALIC, false));
             lore.add(Component.text("✦ Radius: ")
@@ -271,11 +340,20 @@ public class OreScannerBellManager implements Listener {
                 .decoration(TextDecoration.ITALIC, false)
                 .append(Component.text(radius + " blocks")
                     .color(NamedTextColor.AQUA)));
-            lore.add(Component.text("✦ Highlights ores temporarily")
+            if (filter != null && !filter.isEmpty()) {
+                lore.add(Component.text("✦ Filter: ")
+                    .color(NamedTextColor.GRAY)
+                    .decoration(TextDecoration.ITALIC, false)
+                    .append(Component.text(filter)
+                        .color(NamedTextColor.LIGHT_PURPLE)));
+            }
+            lore.add(Component.text("✦ Duration: ")
                 .color(NamedTextColor.GRAY)
-                .decoration(TextDecoration.ITALIC, false));
+                .decoration(TextDecoration.ITALIC, false)
+                .append(Component.text(String.format("%.1fs", durationTicks / 20.0))
+                    .color(NamedTextColor.GREEN)));
             lore.add(Component.empty());
-            lore.add(Component.text("Ring the bell to reveal!")
+            lore.add(Component.text("Right-click to reveal ores!")
                 .color(NamedTextColor.YELLOW)
                 .decoration(TextDecoration.ITALIC, true));
             
@@ -284,11 +362,19 @@ public class OreScannerBellManager implements Listener {
             PersistentDataContainer container = meta.getPersistentDataContainer();
             container.set(oreScannerKey, PersistentDataType.BOOLEAN, true);
             container.set(radiusKey, PersistentDataType.INTEGER, radius);
+            container.set(durationKey, PersistentDataType.INTEGER, durationTicks);
+            if (filter != null && !filter.isEmpty()) {
+                container.set(filterKey, PersistentDataType.STRING, filter);
+            }
             
             bell.setItemMeta(meta);
         }
         
         return bell;
+    }
+
+    public ItemStack createOreScannerBell(int radius) {
+        return createOreScannerBell(radius, null, plugin.getConfig().getInt("ore-scanner-bell.default-duration", 60));
     }
 
     public boolean isOreScannerBell(ItemStack item) {
@@ -319,5 +405,47 @@ public class OreScannerBellManager implements Listener {
             PersistentDataType.INTEGER, 
             plugin.getConfig().getInt("ore-scanner-bell.default-radius", 16)
         );
+    }
+
+    private String getFilter(ItemStack item) {
+        if (item == null) {
+            return null;
+        }
+        
+        ItemMeta meta = item.getItemMeta();
+        if (meta == null) {
+            return null;
+        }
+        
+        return meta.getPersistentDataContainer().get(filterKey, PersistentDataType.STRING);
+    }
+
+    private int getDuration(ItemStack item) {
+        if (item == null) {
+            return plugin.getConfig().getInt("ore-scanner-bell.default-duration", 60);
+        }
+        
+        ItemMeta meta = item.getItemMeta();
+        if (meta == null) {
+            return plugin.getConfig().getInt("ore-scanner-bell.default-duration", 60);
+        }
+        
+        return meta.getPersistentDataContainer().getOrDefault(
+            durationKey, 
+            PersistentDataType.INTEGER, 
+            plugin.getConfig().getInt("ore-scanner-bell.default-duration", 60)
+        );
+    }
+
+    private static class OreScannerBellData {
+        final int radius;
+        final String filter;
+        final int duration;
+        
+        OreScannerBellData(int radius, String filter, int duration) {
+            this.radius = radius;
+            this.filter = filter;
+            this.duration = duration;
+        }
     }
 }

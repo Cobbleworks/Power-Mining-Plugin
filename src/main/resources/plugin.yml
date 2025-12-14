@@ -7,16 +7,11 @@ author: AndiDoesCode
 website: https://github.com/andidoescode/power-mining
 
 commands:
-  givemagnethopper:
-    description: Give a Magnet Hopper to a player
-    usage: /givemagnethopper [player] [radius]
-    permission: powermining.give.magnethopper
-    aliases: [gmh, magnethopper]
-  giveorescannerbell:
-    description: Give an Ore Scanner Bell to a player
-    usage: /giveorescannerbell [player] [radius]
-    permission: powermining.give.orescannerbell
-    aliases: [gosb, orescannerbell]
+  powermining:
+    description: Power Mining main command
+    usage: /powermining <magnethopper|orebell|drill> [args...]
+    permission: powermining.use
+    aliases: [pm]
 
 permissions:
   powermining.*:
