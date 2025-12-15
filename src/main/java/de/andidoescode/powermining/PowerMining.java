@@ -2,10 +2,7 @@ package de.andidoescode.powermining;
 
 import de.andidoescode.powermining.commands.PowerMiningCommand;
 import de.andidoescode.powermining.listeners.MountedMiningListener;
-import de.andidoescode.powermining.managers.EscapeRopeManager;
-import de.andidoescode.powermining.managers.MagnetHopperManager;
-import de.andidoescode.powermining.managers.MinersHelmetManager;
-import de.andidoescode.powermining.managers.OreScannerBellManager;
+import de.andidoescode.powermining.managers.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class PowerMining extends JavaPlugin {
@@ -16,6 +13,9 @@ public class PowerMining extends JavaPlugin {
     private OreScannerBellManager oreScannerBellManager;
     private MinersHelmetManager minersHelmetManager;
     private EscapeRopeManager escapeRopeManager;
+    private CaveCompassManager caveCompassManager;
+    private AutoSmelterPickaxeManager autoSmelterPickaxeManager;
+    private MinersGogglesManager minersGogglesManager;
 
     @Override
     public void onEnable() {
@@ -27,6 +27,9 @@ public class PowerMining extends JavaPlugin {
         oreScannerBellManager = new OreScannerBellManager(this);
         minersHelmetManager = new MinersHelmetManager(this);
         escapeRopeManager = new EscapeRopeManager(this);
+        caveCompassManager = new CaveCompassManager(this);
+        autoSmelterPickaxeManager = new AutoSmelterPickaxeManager(this);
+        minersGogglesManager = new MinersGogglesManager(this);
         
         registerListeners();
         registerCommands();
@@ -48,6 +51,15 @@ public class PowerMining extends JavaPlugin {
         if (escapeRopeManager != null) {
             escapeRopeManager.shutdown();
         }
+        if (caveCompassManager != null) {
+            caveCompassManager.shutdown();
+        }
+        if (autoSmelterPickaxeManager != null) {
+            autoSmelterPickaxeManager.shutdown();
+        }
+        if (minersGogglesManager != null) {
+            minersGogglesManager.shutdown();
+        }
         
         getLogger().info("Power Mining has been disabled!");
     }
@@ -58,6 +70,9 @@ public class PowerMining extends JavaPlugin {
         getServer().getPluginManager().registerEvents(oreScannerBellManager, this);
         getServer().getPluginManager().registerEvents(minersHelmetManager, this);
         getServer().getPluginManager().registerEvents(escapeRopeManager, this);
+        getServer().getPluginManager().registerEvents(caveCompassManager, this);
+        getServer().getPluginManager().registerEvents(autoSmelterPickaxeManager, this);
+        getServer().getPluginManager().registerEvents(minersGogglesManager, this);
     }
 
     private void registerCommands() {
@@ -87,5 +102,17 @@ public class PowerMining extends JavaPlugin {
 
     public EscapeRopeManager getEscapeRopeManager() {
         return escapeRopeManager;
+    }
+
+    public CaveCompassManager getCaveCompassManager() {
+        return caveCompassManager;
+    }
+
+    public AutoSmelterPickaxeManager getAutoSmelterPickaxeManager() {
+        return autoSmelterPickaxeManager;
+    }
+
+    public MinersGogglesManager getMinersGogglesManager() {
+        return minersGogglesManager;
     }
 }

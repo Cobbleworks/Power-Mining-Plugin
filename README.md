@@ -2,7 +2,7 @@
 
 ![Power Mining Icon](placeholder-icon.png)
 
-A Minecraft Paper plugin that enhances the mining experience with powerful features: mounted mining, magnet hoppers, ore scanner bells, miner's helmet, and escape ropes.
+A Minecraft Paper plugin that enhances the mining experience with powerful features: mounted mining, magnet hoppers, ore scanner bells, miner's helmet, escape ropes, cave compass, auto-smelting pickaxe, and miner's goggles.
 
 ## Features
 
@@ -67,38 +67,92 @@ A magical lead item that remembers a location and teleports you back!
 
 **Command:** `/pm escaperope [player]`
 
+### 🧭 Cave Compass
+
+A mystical compass that points to nearby structures like dungeons, mineshafts, and strongholds!
+
+- **Structure tracking:** Points to the nearest selected structure
+- **Cycleable targets:** Shift+Right-click to cycle forward, Shift+Left-click to cycle backward
+- **Available targets:\*\***
+  - Mineshaft
+  - Stronghold
+  - Nether Fortress
+  - Bastion Remnant
+  - Ancient City
+  - Trail Ruins
+  - Trial Chambers
+- **Distance display:** Shows how far away the structure is
+
+**Command:** `/pm cavecompass [player]`
+
+### 🔥 Smelter's Pickaxe
+
+A special gold pickaxe that auto-smelts ores when mining!
+
+- **Instant smelting:** Iron, Gold, and Copper ores drop ingots instead of raw ore
+- **Fortune compatible:** Fortune enchantment multiplies smelted drops
+- **Pre-enchanted:** Comes with Efficiency III and Unbreaking II
+- **Additional smelts:** Also works on cobblestone, sand, clay, and more!
+
+**Command:** `/pm smelterpick [player]`
+
+### 👓 Miner's Goggles
+
+A special leather helmet that reveals nearby ores with a glowing outline!
+
+- **Ore vision:** Ores within range are highlighted with a glowing effect
+- **Configurable radius:** Set reveal radius from 5-20 blocks
+- **Filter support:** Create goggles that only reveal specific ore types
+- **Real-time tracking:** Highlights update as you move through caves
+- **No potion effects:** Works independently without affecting other gameplay
+
+**Command:** `/pm goggles [player] [radius] [--filter ORE_TYPE]`
+
 ## Commands
 
-| Command                                            | Aliases        | Description              |
-| -------------------------------------------------- | -------------- | ------------------------ |
-| `/powermining magnethopper [player] [radius]`      | `/pm mh`       | Give a Magnet Hopper     |
-| `/powermining orebell [player] [radius] [options]` | `/pm ob`       | Give an Ore Scanner Bell |
-| `/powermining helmet [player]`                     | `/pm helmet`   | Give a Miner's Helmet    |
-| `/powermining escaperope [player]`                 | `/pm rope, er` | Give an Escape Rope      |
-| `/powermining drill`                               | `/pm drill`    | Show mounted mining help |
-| `/powermining help`                                | `/pm help`     | Show all commands        |
+| Command                                            | Aliases           | Description              |
+| -------------------------------------------------- | ----------------- | ------------------------ |
+| `/powermining magnethopper [player] [radius]`      | `/pm mh`          | Give a Magnet Hopper     |
+| `/powermining orebell [player] [radius] [options]` | `/pm ob`          | Give an Ore Scanner Bell |
+| `/powermining helmet [player]`                     | `/pm helmet`      | Give a Miner's Helmet    |
+| `/powermining escaperope [player]`                 | `/pm rope, er`    | Give an Escape Rope      |
+| `/powermining cavecompass [player]`                | `/pm compass, cc` | Give a Cave Compass      |
+| `/powermining smelterpick [player]`                | `/pm smelter, sp` | Give a Smelter's Pickaxe |
+| `/powermining goggles [player] [radius] [options]` | `/pm goggles, mg` | Give Miner's Goggles     |
+| `/powermining drill`                               | `/pm drill`       | Show mounted mining help |
+| `/powermining help`                                | `/pm help`        | Show all commands        |
 
 ### Ore Bell Options
 
 - `--filter <ORE_TYPE>` - Only scan for specific ore type (e.g., `DIAMOND_ORE`)
 - `--duration <TICKS>` - Highlight duration in ticks (20 ticks = 1 second)
 
+### Miner's Goggles Options
+
+- `--filter <ORE_TYPE>` - Only reveal specific ore type (e.g., `DIAMOND_ORE`)
+
 ## Permissions
 
-| Permission                        | Description                   | Default |
-| --------------------------------- | ----------------------------- | ------- |
-| `powermining.*`                   | Full access to all features   | op      |
-| `powermining.use.*`               | Use all Power Mining features | true    |
-| `powermining.use.mountedmining`   | Use mounted mining            | true    |
-| `powermining.use.magnethopper`    | Use magnet hoppers            | true    |
-| `powermining.use.orescannerbell`  | Use ore scanner bells         | true    |
-| `powermining.use.minershelmet`    | Use miner's helmets           | true    |
-| `powermining.use.escaperope`      | Use escape ropes              | true    |
-| `powermining.give.*`              | Give Power Mining items       | op      |
-| `powermining.give.magnethopper`   | Give magnet hoppers           | op      |
-| `powermining.give.orescannerbell` | Give ore scanner bells        | op      |
-| `powermining.give.minershelmet`   | Give miner's helmets          | op      |
-| `powermining.give.escaperope`     | Give escape ropes             | op      |
+| Permission                           | Description                   | Default |
+| ------------------------------------ | ----------------------------- | ------- |
+| `powermining.*`                      | Full access to all features   | op      |
+| `powermining.use.*`                  | Use all Power Mining features | true    |
+| `powermining.use.mountedmining`      | Use mounted mining            | true    |
+| `powermining.use.magnethopper`       | Use magnet hoppers            | true    |
+| `powermining.use.orescannerbell`     | Use ore scanner bells         | true    |
+| `powermining.use.minershelmet`       | Use miner's helmets           | true    |
+| `powermining.use.escaperope`         | Use escape ropes              | true    |
+| `powermining.use.cavecompass`        | Use cave compasses            | true    |
+| `powermining.use.autosmelterpickaxe` | Use auto-smelter pickaxes     | true    |
+| `powermining.use.minersgoggles`      | Use miner's goggles           | true    |
+| `powermining.give.*`                 | Give Power Mining items       | op      |
+| `powermining.give.magnethopper`      | Give magnet hoppers           | op      |
+| `powermining.give.orescannerbell`    | Give ore scanner bells        | op      |
+| `powermining.give.minershelmet`      | Give miner's helmets          | op      |
+| `powermining.give.escaperope`        | Give escape ropes             | op      |
+| `powermining.give.cavecompass`       | Give cave compasses           | op      |
+| `powermining.give.smelterpickaxe`    | Give smelter's pickaxes       | op      |
+| `powermining.give.minersgoggles`     | Give miner's goggles          | op      |
 
 ## Configuration
 
@@ -144,6 +198,28 @@ miners-helmet:
 # Escape Rope Settings
 escape-rope:
   enabled: true
+
+# Cave Compass Settings
+cave-compass:
+  enabled: true
+  search-radius: 5000 # Max distance to search structures
+
+# Auto-Smelter Pickaxe Settings
+auto-smelter-pickaxe:
+  enabled: true
+
+# Miner's Goggles Settings
+miners-goggles:
+  enabled: true
+  default-radius: 10 # Default reveal radius
+  min-radius: 5 # Minimum radius
+  max-radius: 20 # Maximum radius
+  highlight-interval: 20 # Ticks between updates
+  highlight-color: GOLD # Glow color
+  ore-types: # Detectable ore list
+    - DIAMOND_ORE
+    - IRON_ORE
+    # ... and more
 ```
 
 ## Installation

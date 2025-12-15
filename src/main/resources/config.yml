@@ -72,6 +72,53 @@ miners-helmet:
 escape-rope:
   enabled: true
 
+# Cave Compass Settings
+cave-compass:
+  enabled: true
+  # Maximum distance to search for structures (in blocks)
+  search-radius: 5000
+
+# Auto-Smelter Pickaxe Settings
+auto-smelter-pickaxe:
+  enabled: true
+
+# Miner's Goggles Settings
+miners-goggles:
+  enabled: true
+  # Default reveal radius (in blocks)
+  default-radius: 10
+  # Minimum reveal radius
+  min-radius: 5
+  # Maximum reveal radius
+  max-radius: 20
+  # How often to refresh ore highlights (in ticks, 20 = 1 second)
+  highlight-interval: 20
+  # Highlight glow color (uses scoreboard team colors)
+  # Options: BLACK, DARK_BLUE, DARK_GREEN, DARK_AQUA, DARK_RED, DARK_PURPLE,
+  #          GOLD, GRAY, DARK_GRAY, BLUE, GREEN, AQUA, RED, LIGHT_PURPLE, YELLOW, WHITE
+  highlight-color: GOLD
+  # List of detectable ore types (when no filter is applied)
+  ore-types:
+    - COAL_ORE
+    - DEEPSLATE_COAL_ORE
+    - IRON_ORE
+    - DEEPSLATE_IRON_ORE
+    - COPPER_ORE
+    - DEEPSLATE_COPPER_ORE
+    - GOLD_ORE
+    - DEEPSLATE_GOLD_ORE
+    - REDSTONE_ORE
+    - DEEPSLATE_REDSTONE_ORE
+    - EMERALD_ORE
+    - DEEPSLATE_EMERALD_ORE
+    - LAPIS_ORE
+    - DEEPSLATE_LAPIS_ORE
+    - DIAMOND_ORE
+    - DEEPSLATE_DIAMOND_ORE
+    - NETHER_GOLD_ORE
+    - NETHER_QUARTZ_ORE
+    - ANCIENT_DEBRIS
+
 # Messages (supports MiniMessage format)
 messages:
   magnet-hopper-given: "<green>You received a <gold>Magnet Hopper</gold> with radius <yellow>{radius}</yellow>!</green>"
@@ -85,4 +132,7 @@ messages:
   escape-rope-teleport: "<green>Whoosh! You've been teleported back to your return point!</green>"
   escape-rope-no-point: "<red>No return point set! Right-click a block first.</red>"
   escape-rope-invalid: "<red>Return point is no longer valid!</red>"
+  cave-compass-given: "<green>You received a <light_purple>Cave Compass</light_purple>! Shift+Right-click to cycle targets.</green>"
+  smelter-pickaxe-given: "<green>You received a <red>Smelter's Pickaxe</red>! Ores are auto-smelted when mined.</green>"
+  miners-goggles-given: "<green>You received <gold>Miner's Goggles</gold>! Ores within <yellow>{radius}</yellow> blocks will glow when worn.</green>"
   no-permission: "<red>You don't have permission to do that!</red>"
