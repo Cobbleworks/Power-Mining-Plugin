@@ -1,14 +1,78 @@
-# Power Mining
+# Power-Mining-Tools
 
-![Power Mining Icon](placeholder-icon.png)
-
-A Minecraft Paper plugin that enhances the mining experience with powerful features: mounted mining, magnet hoppers, ore scanner bells, miner's helmet, escape ropes, cave compass, auto-smelting pickaxe, and miner's goggles.
+Power-Mining-Tools adds a full set of mining-focused utilities, mobility items, and automation helpers for survival servers running Paper-compatible APIs.
 
 ## Features
 
-### 🐴 Mounted Mining (Drill)
+- Mounted mining support for continuous excavation workflows
+- Magnet hoppers for automated nearby item collection
+- Ore scanner bells for exploratory mining feedback
+- Utility equipment including miner's helmet, cave compass, and miner's goggles
+- Mobility/survival tools such as escape ropes and instant ladders
+- Resource optimization tools including auto-smelter pickaxes
 
-Automatically mine blocks while riding horses, donkeys, mules, and other mounts!
+## Commands
+
+Main command:
+
+- `/powermining` (alias: `/pm`)
+
+| Command | Description |
+| --- | --- |
+| `/powermining magnethopper ...` | Manage magnet hopper behavior and distribution |
+| `/powermining orebell ...` | Configure ore scanner bell interactions |
+| `/powermining drill ...` | Configure mounted mining features |
+
+## Permissions
+
+Core groups:
+
+| Permission | Default | Description |
+| --- | --- | --- |
+| `powermining.*` | op | Full access to all plugin permissions |
+| `powermining.use.*` | true | Access all player-use features |
+| `powermining.give.*` | op | Access all give-item permissions |
+
+Feature access permissions:
+
+- `powermining.use.mountedmining`
+- `powermining.use.magnethopper`
+- `powermining.use.orescannerbell`
+- `powermining.use.minershelmet`
+- `powermining.use.escaperope`
+- `powermining.use.depthmeter`
+- `powermining.use.cavecompass`
+- `powermining.use.instantladder`
+- `powermining.use.autosmelterpickaxe`
+- `powermining.use.minersgoggles`
+
+Item grant permissions:
+
+- `powermining.give.magnethopper`
+- `powermining.give.orescannerbell`
+- `powermining.give.minershelmet`
+- `powermining.give.escaperope`
+- `powermining.give.depthmeter`
+- `powermining.give.cavecompass`
+- `powermining.give.instantladder`
+- `powermining.give.smelterpickaxe`
+- `powermining.give.minersgoggles`
+
+## Installation
+
+1. Download the latest jar from Releases.
+2. Place the jar in your server `plugins` directory.
+3. Restart the server.
+4. Configure permissions according to your gameplay balance.
+
+## Compatibility
+
+- API: Paper/Spigot/Bukkit 1.21+
+- Java: 21+
+
+## License
+
+This project is licensed under the MIT License.
 
 ![Mounted Mining Screenshot](screenshots/mounted-mining.png)
 
