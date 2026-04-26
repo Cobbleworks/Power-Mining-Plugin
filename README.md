@@ -1,343 +1,57 @@
-<p align="center">
+﻿<p align="center">
   <img src="images/plugin-logo.png" alt="Power Mining Tools" width="128" />
 </p>
-# Power-Mining-Tools
+<h1 align="center">Power Mining Tools</h1>
+<p align="center">
+  <b>Mining enhancements for Minecraft servers.</b><br>
+  <b>Mounted mining, magnet hoppers, ore scanner, escape ropes, and auto-smelting.</b>
+</p>
+<p align="center">
+  <a href="https://github.com/Cobbleworks/Power-Mining-Tools/releases"><img src="https://img.shields.io/github/v/release/Cobbleworks/Power-Mining-Tools?include_prereleases&style=flat-square&color=4CAF50" alt="Latest Release"></a>&nbsp;&nbsp;<a href="https://github.com/Cobbleworks/Power-Mining-Tools/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License"></a>&nbsp;&nbsp;<img src="https://img.shields.io/badge/Java-17+-orange?style=flat-square" alt="Java Version">&nbsp;&nbsp;<img src="https://img.shields.io/badge/Minecraft-1.21+-green?style=flat-square" alt="Minecraft Version">&nbsp;&nbsp;<img src="https://img.shields.io/badge/Platform-Spigot%2FPaper-yellow?style=flat-square" alt="Platform">&nbsp;&nbsp;<img src="https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square" alt="Status">
+</p>
 
-Power-Mining-Tools adds a full set of mining-focused utilities, mobility items, and automation helpers for survival servers running Paper-compatible APIs.
+Power Mining Tools is an open-source Minecraft plugin that provides a comprehensive set of mining enhancements for Spigot and Paper servers. From riding a horse while automatically excavating a 3×3×3 tunnel, to magnet hoppers that pull in nearby drops, to leather goggles that highlight ores through walls — the plugin transforms every aspect of cave exploration and resource gathering. All tools are given via commands and are fully configurable per-item at runtime.
 
-## Features
+### **Core Features**
 
-- Mounted mining support for continuous excavation workflows
-- Magnet hoppers for automated nearby item collection
-- Ore scanner bells for exploratory mining feedback
-- Utility equipment including miner's helmet, cave compass, and miner's goggles
-- Mobility/survival tools such as escape ropes and instant ladders
-- Resource optimization tools including auto-smelter pickaxes
+- **Mounted Mining (Drill):** Automatically mine a 3×3×3 area in front of your mount while riding horses, donkeys, or mules — respects enchantments and durability
+- **Magnet Hopper:** Special hoppers that attract nearby dropped items with configurable attraction radius and smooth pull animation using soul fire flame particles
+- **Ore Scanner Bell:** Placeable bells that reveal all ores within a configurable radius using color-coded glowing outlines when activated by right-click
+- **Miner's Helmet:** Gold helmet that permanently grants night vision as long as it is worn — no potions required
+- **Escape Rope:** Magical lead item that remembers a set location and teleports the player back on use — consumed on teleport
+- **Cave Compass:** Mystical compass that points toward the nearest selectable structure (mineshafts, strongholds, nether fortresses, ancient cities, and more)
+- **Smelter's Pickaxe:** Special gold pickaxe that auto-smelts ores on break — Fortune compatible, also works on cobblestone, sand, clay, and more
+- **Miner's Goggles:** Leather helmet that reveals nearby ores in real time with a configurable glowing radius and ore filter support
 
-## Commands
+### **Supported Platforms**
 
-Main command:
+- **Server Software:** `Spigot`, `Paper`, `Purpur`, `CraftBukkit`
+- **Minecraft Versions:** `1.21.5`, `1.21.6`, `1.21.7`, `1.21.8`, `1.21.9`, `1.21.10` and higher
+- **Java Requirements:** `Java 17+`
 
-- `/powermining` (alias: `/pm`)
+### **Installation**
+
+1. Download the latest `.jar` from the [Releases](https://github.com/Cobbleworks/Power-Mining-Tools/releases) page
+2. Stop your Minecraft server
+3. Copy the `.jar` into your server's `plugins` folder
+4. Start your server — a default configuration folder is generated at `plugins/PowerMining/`
+
+### **Player Commands**
 
 | Command | Description |
-| --- | --- |
-| `/powermining magnethopper ...` | Manage magnet hopper behavior and distribution |
-| `/powermining orebell ...` | Configure ore scanner bell interactions |
-| `/powermining drill ...` | Configure mounted mining features |
-
-## Permissions
-
-Core groups:
-
-| Permission | Default | Description |
-| --- | --- | --- |
-| `powermining.*` | op | Full access to all plugin permissions |
-| `powermining.use.*` | true | Access all player-use features |
-| `powermining.give.*` | op | Access all give-item permissions |
-
-Feature access permissions:
-
-- `powermining.use.mountedmining`
-- `powermining.use.magnethopper`
-- `powermining.use.orescannerbell`
-- `powermining.use.minershelmet`
-- `powermining.use.escaperope`
-- `powermining.use.depthmeter`
-- `powermining.use.cavecompass`
-- `powermining.use.instantladder`
-- `powermining.use.autosmelterpickaxe`
-- `powermining.use.minersgoggles`
-
-Item grant permissions:
-
-- `powermining.give.magnethopper`
-- `powermining.give.orescannerbell`
-- `powermining.give.minershelmet`
-- `powermining.give.escaperope`
-- `powermining.give.depthmeter`
-- `powermining.give.cavecompass`
-- `powermining.give.instantladder`
-- `powermining.give.smelterpickaxe`
-- `powermining.give.minersgoggles`
-
-## Installation
-
-1. Download the latest jar from Releases.
-2. Place the jar in your server `plugins` directory.
-3. Restart the server.
-4. Configure permissions according to your gameplay balance.
-
-## Compatibility
-
-- API: Paper/Spigot/Bukkit 1.21+
-- Java: 21+
-
-## License
-
-This project is licensed under the MIT License.
-
-![Mounted Mining Screenshot](screenshots/mounted-mining.png)
-
-- **How it works:** Simply ride any horse-like mount while holding a pickaxe
-- **Mining area:** 3x3x3 blocks in front of your mount
-- **Smart offset:** Never mines below your mount's hooves (prevents falling into holes)
-- **Durability:** Respects pickaxe durability and enchantments
-- **Configurable:** Adjust mining radius, interval, and Y-offset in config
-
-### 🧲 Magnet Hopper
-
-A special hopper that attracts nearby dropped items like a magnet!
-
-![Magnet Hopper Screenshot](screenshots/magnet-hopper.png)
-
-- **Particle effects:** Soul fire flame particles indicate active magnet hoppers
-- **Customizable radius:** Set the attraction radius when giving the item
-- **Smooth attraction:** Items are smoothly pulled towards the hopper
-- **Preserves data:** Breaking the hopper drops the special item with its settings
-
-**Command:** `/pm magnethopper [player] [radius]`
-
-### 🔔 Ore Scanner Bell
-
-A placeable bell that reveals all ores in a customizable radius when activated!
-
-![Ore Scanner Bell Screenshot](screenshots/ore-scanner-bell.png)
-
-- **Right-click activation:** Place the bell and right-click to scan
-- **Glowing outlines:** Ores are highlighted with color-coded glowing outlines
-- **Filter option:** Scan for specific ore types only
-- **Custom duration:** Control how long highlights last
-- **Cooldown:** Configurable cooldown between scans
-
-**Command:** `/pm orebell [player] [radius] [--filter ORE_TYPE] [--duration TICKS]`
-
-### ⛑️ Miner's Helmet
-
-A special gold helmet that grants night vision when worn!
-
-- **Automatic effect:** Night vision is applied automatically when wearing the helmet
-- **No potions needed:** Perfect for mining in dark caves without carrying potions
-- **Persistent effect:** Effect stays active as long as the helmet is worn
-
-**Command:** `/pm helmet [player]`
-
-### 🪢 Escape Rope
-
-A magical lead item that remembers a location and teleports you back!
-
-- **Set return point:** Right-click on a block to remember that location
-- **Visual feedback:** Item name and lore update to show the saved coordinates
-- **Teleport back:** Right-click in the air to teleport back to the saved location
-- **Single use:** The escape rope is consumed when you teleport
-- **Particle effects:** Beautiful portal particles on teleportation
-
-**Command:** `/pm escaperope [player]`
-
-### 🧭 Cave Compass
-
-A mystical compass that points to nearby structures like dungeons, mineshafts, and strongholds!
-
-- **Structure tracking:** Points to the nearest selected structure
-- **Cycleable targets:** Shift+Right-click to cycle forward, Shift+Left-click to cycle backward
-- **Available targets:\*\***
-  - Mineshaft
-  - Stronghold
-  - Nether Fortress
-  - Bastion Remnant
-  - Ancient City
-  - Trail Ruins
-  - Trial Chambers
-- **Distance display:** Shows how far away the structure is
-
-**Command:** `/pm cavecompass [player]`
-
-### 🔥 Smelter's Pickaxe
-
-A special gold pickaxe that auto-smelts ores when mining!
-
-- **Instant smelting:** Iron, Gold, and Copper ores drop ingots instead of raw ore
-- **Fortune compatible:** Fortune enchantment multiplies smelted drops
-- **Pre-enchanted:** Comes with Efficiency III and Unbreaking II
-- **Additional smelts:** Also works on cobblestone, sand, clay, and more!
-
-**Command:** `/pm smelterpick [player]`
-
-### 👓 Miner's Goggles
-
-A special leather helmet that reveals nearby ores with a glowing outline!
-
-- **Ore vision:** Ores within range are highlighted with a glowing effect
-- **Configurable radius:** Set reveal radius from 5-20 blocks
-- **Filter support:** Create goggles that only reveal specific ore types
-- **Real-time tracking:** Highlights update as you move through caves
-- **No potion effects:** Works independently without affecting other gameplay
-
-**Command:** `/pm goggles [player] [radius] [--filter ORE_TYPE]`
-
-## Commands
-
-| Command                                            | Aliases           | Description              |
-| -------------------------------------------------- | ----------------- | ------------------------ |
-| `/powermining magnethopper [player] [radius]`      | `/pm mh`          | Give a Magnet Hopper     |
-| `/powermining orebell [player] [radius] [options]` | `/pm ob`          | Give an Ore Scanner Bell |
-| `/powermining helmet [player]`                     | `/pm helmet`      | Give a Miner's Helmet    |
-| `/powermining escaperope [player]`                 | `/pm rope, er`    | Give an Escape Rope      |
-| `/powermining cavecompass [player]`                | `/pm compass, cc` | Give a Cave Compass      |
-| `/powermining smelterpick [player]`                | `/pm smelter, sp` | Give a Smelter's Pickaxe |
-| `/powermining goggles [player] [radius] [options]` | `/pm goggles, mg` | Give Miner's Goggles     |
-| `/powermining drill`                               | `/pm drill`       | Show mounted mining help |
-| `/powermining help`                                | `/pm help`        | Show all commands        |
-
-### Ore Bell Options
-
-- `--filter <ORE_TYPE>` - Only scan for specific ore type (e.g., `DIAMOND_ORE`)
-- `--duration <TICKS>` - Highlight duration in ticks (20 ticks = 1 second)
-
-### Miner's Goggles Options
-
-- `--filter <ORE_TYPE>` - Only reveal specific ore type (e.g., `DIAMOND_ORE`)
-
-## Permissions
-
-| Permission                           | Description                   | Default |
-| ------------------------------------ | ----------------------------- | ------- |
-| `powermining.*`                      | Full access to all features   | op      |
-| `powermining.use.*`                  | Use all Power Mining features | true    |
-| `powermining.use.mountedmining`      | Use mounted mining            | true    |
-| `powermining.use.magnethopper`       | Use magnet hoppers            | true    |
-| `powermining.use.orescannerbell`     | Use ore scanner bells         | true    |
-| `powermining.use.minershelmet`       | Use miner's helmets           | true    |
-| `powermining.use.escaperope`         | Use escape ropes              | true    |
-| `powermining.use.cavecompass`        | Use cave compasses            | true    |
-| `powermining.use.autosmelterpickaxe` | Use auto-smelter pickaxes     | true    |
-| `powermining.use.minersgoggles`      | Use miner's goggles           | true    |
-| `powermining.give.*`                 | Give Power Mining items       | op      |
-| `powermining.give.magnethopper`      | Give magnet hoppers           | op      |
-| `powermining.give.orescannerbell`    | Give ore scanner bells        | op      |
-| `powermining.give.minershelmet`      | Give miner's helmets          | op      |
-| `powermining.give.escaperope`        | Give escape ropes             | op      |
-| `powermining.give.cavecompass`       | Give cave compasses           | op      |
-| `powermining.give.smelterpickaxe`    | Give smelter's pickaxes       | op      |
-| `powermining.give.minersgoggles`     | Give miner's goggles          | op      |
-
-## Configuration
-
-```yaml
-# Mounted Mining Settings
-mounted-mining:
-  enabled: true
-  radius-x: 1 # Mining area width
-  radius-y: 1 # Mining area height
-  radius-z: 1 # Mining area depth
-  mining-interval: 5 # Ticks between mining
-  y-offset: 1 # Height offset from mount
-
-# Magnet Hopper Settings
-magnet-hopper:
-  enabled: true
-  default-radius: 8 # Default attraction radius
-  max-radius: 32 # Maximum allowed radius
-  attraction-interval: 5
-  attraction-speed: 0.5
-  particles:
-    enabled: true
-    type: SOUL_FIRE_FLAME
-    count: 3
-    interval: 10
-
-# Ore Scanner Bell Settings
-ore-scanner-bell:
-  enabled: true
-  default-radius: 16
-  max-radius: 64
-  default-duration: 60 # Ticks (60 = 3 seconds)
-  cooldown: 30 # Seconds
-  ore-types: # Customizable ore list
-    - DIAMOND_ORE
-    - IRON_ORE
-    # ... and more
-
-# Miner's Helmet Settings
-miners-helmet:
-  enabled: true
-
-# Escape Rope Settings
-escape-rope:
-  enabled: true
-
-# Cave Compass Settings
-cave-compass:
-  enabled: true
-  search-radius: 5000 # Max distance to search structures
-
-# Auto-Smelter Pickaxe Settings
-auto-smelter-pickaxe:
-  enabled: true
-
-# Miner's Goggles Settings
-miners-goggles:
-  enabled: true
-  default-radius: 10 # Default reveal radius
-  min-radius: 5 # Minimum radius
-  max-radius: 20 # Maximum radius
-  highlight-interval: 20 # Ticks between updates
-  highlight-color: GOLD # Glow color
-  ore-types: # Detectable ore list
-    - DIAMOND_ORE
-    - IRON_ORE
-    # ... and more
-```
-
-## Installation
-
-1. Download the latest release from [Releases](releases/)
-2. Place `power-mining-1.0.0.jar` in your server's `plugins` folder
-3. Restart your server
-4. (Optional) Configure `plugins/PowerMining/config.yml`
-
-## Requirements
-
-- **Minecraft:** 1.21.4+
-- **Server:** Paper or forks (Purpur, etc.)
-- **Java:** 21+
-
-## Building from Source
-
-```bash
-git clone https://github.com/yourusername/power-mining.git
-cd power-mining
-mvn clean package
-```
-
-The compiled JAR will be in `target/power-mining-1.0.0.jar`
-
-## Ore Color Guide
-
-The ore scanner bell highlights different ores with distinct colors:
-
-| Ore            | Glow Color   |
-| -------------- | ------------ |
-| Diamond        | Cyan         |
-| Emerald        | Bright Green |
-| Gold           | Gold         |
-| Iron           | Tan          |
-| Copper         | Orange-Brown |
-| Redstone       | Red          |
-| Lapis          | Blue         |
-| Coal           | Dark Gray    |
-| Quartz         | White        |
-| Ancient Debris | Brown        |
-
-## Support
-
-If you encounter any issues or have suggestions, please [open an issue](issues/).
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-Made with ❤️ for the Minecraft community
-
+|---------|-------------|
+| `/pm magnethopper [player] [radius]` | Give a Magnet Hopper |
+| `/pm orebell [player] [radius] [--filter ORE_TYPE] [--duration TICKS]` | Give an Ore Scanner Bell |
+| `/pm helmet [player]` | Give a Miner's Helmet |
+| `/pm escaperope [player]` | Give an Escape Rope |
+| `/pm cavecompass [player]` | Give a Cave Compass |
+| `/pm smelterpick [player]` | Give a Smelter's Pickaxe |
+| `/pm goggles [player] [radius] [--filter ORE_TYPE]` | Give Miner's Goggles |
+| `/pm drill` | Show mounted mining help and usage |
+| `/pm help` | Show all available commands |
+
+**Aliases:** `/powermining`, `/pm`
+
+### **License**
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
