@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="images/plugin-logo.png" alt="Power Mining Tools" width="128" />
+</p>
 # Power-Mining-Tools
 
 Power-Mining-Tools adds a full set of mining-focused utilities, mobility items, and automation helpers for survival servers running Paper-compatible APIs.
@@ -337,3 +340,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 Made with ❤️ for the Minecraft community
+
