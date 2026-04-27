@@ -146,15 +146,15 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ## **Screenshots**
 
-The screenshots below demonstrate the core features of the Power Mining Tools plugin, including mounted mining, magnet hoppers, ore scanner bells, and miner's goggles.
+The screenshots below demonstrate the core features of the Power Mining Tools plugin, including mounted auto-mining with a donkey and pickaxe, and the escape rope for returning to a saved position.
 
 <table>
   <tr>
-    <th>Power Mining - Mounted Mining</th>
-    <th>Power Mining - Ore Scanner Bell</th>
+    <th>Power Mining - Donkey Auto Mining</th>
+    <th>Power Mining - Escape Rope</th>
   </tr>
   <tr>
-    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-drill.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-drill.png" alt="Mounted Mining" width="450"></a></td>
-    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-scanner.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-scanner.png" alt="Ore Scanner Bell" width="450"></a></td>
+    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-donkey-mining.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-donkey-mining.png" alt="Donkey Auto Mining" width="450"></a></td>
+    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-escape-rope.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-escape-rope.png" alt="Escape Rope" width="450"></a></td>
   </tr>
 </table>
