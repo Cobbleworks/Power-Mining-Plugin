@@ -151,18 +151,10 @@ The screenshots below demonstrate the core features of the Power Mining Tools pl
 <table>
   <tr>
     <th>Power Mining - Mounted Mining</th>
-    <th>Power Mining - Magnet Hopper</th>
+    <th>Power Mining - Ore Scanner Bell</th>
   </tr>
   <tr>
     <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-drill.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-drill.png" alt="Mounted Mining" width="450"></a></td>
-    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-hopper.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-hopper.png" alt="Magnet Hopper" width="450"></a></td>
-  </tr>
-  <tr>
-    <th>Power Mining - Ore Scanner Bell</th>
-    <th>Power Mining - Miner's Goggles</th>
-  </tr>
-  <tr>
     <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-scanner.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-scanner.png" alt="Ore Scanner Bell" width="450"></a></td>
-    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-goggles.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-goggles.png" alt="Miner's Goggles" width="450"></a></td>
   </tr>
 </table>
