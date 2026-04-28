@@ -1,6 +1,3 @@
-<p align="center">
-  <img src="images/plugin-logo.png" alt="Power Mining Tools Plugin" width="180" />
-</p>
 <h1 align="center">Power Mining Tools Plugin</h1>
 <p align="center">
   <b>Mining enhancements for Minecraft servers.</b><br>
