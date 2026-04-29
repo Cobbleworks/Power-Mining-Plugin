@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="images/plugin-logo.png" alt="Power Mining Tools Plugin" width="180" />
+</p>
 <h1 align="center">Power Mining Tools Plugin</h1>
 <p align="center">
   <b>Mining enhancements for Minecraft servers.</b><br>
@@ -286,15 +289,15 @@ The screenshots below highlight core gameplay tools, including mounted mining, r
     <th>Power Mining - Ore Scanner Bell Reveal</th>
   </tr>
   <tr>
-    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/2026-04-28_22.38.36.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/2026-04-28_22.38.36.png" alt="Miner Helmet Night Vision" width="450"></a></td>
-    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/2026-04-28_22.40.50.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/2026-04-28_22.40.50.png" alt="Ore Scanner Bell" width="450"></a></td>
+    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-miner-helmet.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-miner-helmet.png" alt="Miner Helmet Night Vision" width="450"></a></td>
+    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-ore-scanner-bell.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-ore-scanner-bell.png" alt="Ore Scanner Bell" width="450"></a></td>
   </tr>
   <tr>
     <th>Power Mining - Magnet Hopper Gold Pickup</th>
-    <th>Power Mining - Coming Soon</th>
+    <th>Power Mining - Ore Bell Custom Filter</th>
   </tr>
   <tr>
-    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/2026-04-28_22.41.34.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/2026-04-28_22.41.34.png" alt="Magnet Hopper Gold Collection" width="450"></a></td>
-    <td><em>Reserved for upcoming screenshot</em></td>
+    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-magnet-hopper.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-magnet-hopper.png" alt="Magnet Hopper Gold Collection" width="450"></a></td>
+    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-ore-bell-config.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-ore-bell-config.png" alt="Ore Bell Custom Filter" width="450"></a></td>
   </tr>
 </table>
