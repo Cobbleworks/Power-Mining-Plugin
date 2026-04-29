@@ -270,15 +270,28 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ## **Screenshots**
 
-The screenshots below demonstrate the core features of the Power Mining Tools plugin, including mounted auto-mining with a donkey and pickaxe, and the escape rope for returning to a saved position.
+The screenshots below highlight core gameplay tools, including mounted mining, return teleport, low-light mining support, ore scanning, and magnetic item collection.
 
 <table>
   <tr>
     <th>Power Mining - Donkey Auto Mining</th>
     <th>Power Mining - Escape Rope</th>
+    <th>Power Mining - Miner's Helmet</th>
   </tr>
   <tr>
     <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-donkey-mining.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-donkey-mining.png" alt="Donkey Auto Mining" width="450"></a></td>
     <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-escape-rope.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-escape-rope.png" alt="Escape Rope" width="450"></a></td>
+    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/2026-04-28_22.38.36.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/2026-04-28_22.38.36.png" alt="Miner Helmet Night Vision" width="450"></a></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th>Power Mining - Ore Scanner Bell</th>
+    <th>Power Mining - Magnet Hopper Collection</th>
+  </tr>
+  <tr>
+    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/2026-04-28_22.40.50.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/2026-04-28_22.40.50.png" alt="Ore Scanner Bell" width="450"></a></td>
+    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/2026-04-28_22.41.34.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/2026-04-28_22.41.34.png" alt="Magnet Hopper Gold Collection" width="450"></a></td>
   </tr>
 </table>
