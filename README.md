@@ -1,16 +1,16 @@
 <p align="center">
-  <img src="images/plugin-logo.png" alt="Power Mining Tools Plugin" width="180" />
+  <img src="images/plugin-logo.png" alt="Power Mining Plugin" width="180" />
 </p>
-<h1 align="center">Power Mining Tools Plugin</h1>
+<h1 align="center">Power Mining Plugin</h1>
 <p align="center">
   <b>Mining enhancements for Minecraft servers.</b><br>
   <b>Mounted mining, utility tools, structure tracking, ore scanning, and auto-smelting.</b>
 </p>
 <p align="center">
-  <a href="https://github.com/Cobbleworks/Power-Mining-Tools/releases"><img src="https://img.shields.io/github/v/release/Cobbleworks/Power-Mining-Tools?include_prereleases&style=flat-square&color=4CAF50" alt="Latest Release"></a>&nbsp;&nbsp;<a href="https://github.com/Cobbleworks/Power-Mining-Tools/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License"></a>&nbsp;&nbsp;<img src="https://img.shields.io/badge/Java-17+-orange?style=flat-square" alt="Java Version">&nbsp;&nbsp;<img src="https://img.shields.io/badge/Minecraft-1.21+-green?style=flat-square" alt="Minecraft Version">&nbsp;&nbsp;<img src="https://img.shields.io/badge/Platform-Spigot%2FPaper-yellow?style=flat-square" alt="Platform">&nbsp;&nbsp;<img src="https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square" alt="Status">&nbsp;&nbsp;<a href="https://github.com/Cobbleworks/Power-Mining-Tools/issues"><img src="https://img.shields.io/github/issues/Cobbleworks/Power-Mining-Tools?style=flat-square&color=orange" alt="Open Issues"></a>
+  <a href="https://github.com/Cobbleworks/Power-Mining-Plugin/releases"><img src="https://img.shields.io/github/v/release/Cobbleworks/Power-Mining-Plugin?include_prereleases&style=flat-square&color=4CAF50" alt="Latest Release"></a>&nbsp;&nbsp;<a href="https://github.com/Cobbleworks/Power-Mining-Plugin/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License"></a>&nbsp;&nbsp;<img src="https://img.shields.io/badge/Java-17+-orange?style=flat-square" alt="Java Version">&nbsp;&nbsp;<img src="https://img.shields.io/badge/Minecraft-1.21+-green?style=flat-square" alt="Minecraft Version">&nbsp;&nbsp;<img src="https://img.shields.io/badge/Platform-Spigot%2FPaper-yellow?style=flat-square" alt="Platform">&nbsp;&nbsp;<img src="https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square" alt="Status">&nbsp;&nbsp;<a href="https://github.com/Cobbleworks/Power-Mining-Plugin/issues"><img src="https://img.shields.io/github/issues/Cobbleworks/Power-Mining-Plugin?style=flat-square&color=orange" alt="Open Issues"></a>
 </p>
 
-Power Mining Tools is an open-source Minecraft plugin that provides a set of mining utility items and mounted mining mechanics. Items are given through `/powermining` subcommands and carry per-item metadata (radius, filter, duration, mode) using persistent data. The plugin includes automated mounted mining, magnetic item collection hoppers, placeable ore scanner bells, wearables for night vision and ore highlighting, return-point teleport ropes, structure-tracking compasses, and an auto-smelting pickaxe.
+Power Mining is an open-source Minecraft plugin that provides a set of mining utility items and mounted mining mechanics. Items are given through `/powermining` subcommands and carry per-item metadata (radius, filter, duration, mode) using persistent data. The plugin includes automated mounted mining, magnetic item collection hoppers, placeable ore scanner bells, wearables for night vision and ore highlighting, return-point teleport ropes, structure-tracking compasses, and an auto-smelting pickaxe.
 
 ### **Core Features**
 
@@ -58,25 +58,25 @@ Power Mining Tools is an open-source Minecraft plugin that provides a set of min
 
 ### **Prerequisites**
 
-Before installing Power Mining Tools, confirm the following requirements are met:
+Before installing Power Mining, confirm the following requirements are met:
 
 - A Minecraft server running **Spigot**, **Paper**, **Purpur**, or any compatible fork
 - Server version **1.21 or higher** (`api-version: 1.21` is the minimum)
 - **Java 17** or newer installed on the machine running the server
 - Operator or console access to install plugin files
 
-No additional plugins or libraries are needed. Power Mining Tools has zero external dependencies.
+No additional plugins or libraries are needed. Power Mining has zero external dependencies.
 
 ### **Installation Steps**
 
-1. Download the latest `PowerMining-x.x.x.jar` from the [Releases](https://github.com/Cobbleworks/Power-Mining-Tools/releases) page
+1. Download the latest `PowerMining-x.x.x.jar` from the [Releases](https://github.com/Cobbleworks/Power-Mining-Plugin/releases) page
 2. **Stop your server completely** before placing any files
 3. Copy the `.jar` into your server's `plugins/` directory
-4. Start the server - Power Mining Tools generates its configuration folder automatically on first boot
+4. Start the server - Power Mining generates its configuration folder automatically on first boot
 
 ### **First Launch & Configuration**
 
-On the first server start after installation, Power Mining Tools creates the following structure:
+On the first server start after installation, Power Mining creates the following structure:
 
 ```
 plugins/
@@ -225,7 +225,7 @@ All commands require the corresponding `powermining.give.*` permission (operator
 
 ## **Building from Source**
 
-Power Mining Tools uses **Apache Maven** as its build system. The plugin is packaged as a standard JAR with no external runtime dependencies.
+Power Mining uses **Apache Maven** as its build system. The plugin is packaged as a standard JAR with no external runtime dependencies.
 
 **Requirements:**
 - Java 17 or newer
@@ -235,8 +235,8 @@ Power Mining Tools uses **Apache Maven** as its build system. The plugin is pack
 
 ```bash
 # Clone the repository
-git clone https://github.com/Cobbleworks/Power-Mining-Tools.git
-cd Power-Mining-Tools
+git clone https://github.com/Cobbleworks/Power-Mining-Plugin.git
+cd Power-Mining-Plugin
 
 # Compile and package
 mvn clean package
@@ -281,23 +281,23 @@ The screenshots below highlight core gameplay tools, including mounted mining, r
     <th>Power Mining - Escape Rope</th>
   </tr>
   <tr>
-    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-donkey-mining.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-donkey-mining.png" alt="Donkey Auto Mining" width="450"></a></td>
-    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-escape-rope.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-escape-rope.png" alt="Escape Rope" width="450"></a></td>
+    <td><a href="https://github.com/Cobbleworks/Power-Mining-Plugin/raw/main/images/screenshot-donkey-mining.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Plugin/raw/main/images/screenshot-donkey-mining.png" alt="Donkey Auto Mining" width="450"></a></td>
+    <td><a href="https://github.com/Cobbleworks/Power-Mining-Plugin/raw/main/images/screenshot-escape-rope.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Plugin/raw/main/images/screenshot-escape-rope.png" alt="Escape Rope" width="450"></a></td>
   </tr>
   <tr>
     <th>Power Mining - Miner's Helmet Night Vision</th>
     <th>Power Mining - Ore Scanner Bell Reveal</th>
   </tr>
   <tr>
-    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-miner-helmet.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-miner-helmet.png" alt="Miner Helmet Night Vision" width="450"></a></td>
-    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-ore-scanner-bell.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-ore-scanner-bell.png" alt="Ore Scanner Bell" width="450"></a></td>
+    <td><a href="https://github.com/Cobbleworks/Power-Mining-Plugin/raw/main/images/screenshot-miner-helmet.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Plugin/raw/main/images/screenshot-miner-helmet.png" alt="Miner Helmet Night Vision" width="450"></a></td>
+    <td><a href="https://github.com/Cobbleworks/Power-Mining-Plugin/raw/main/images/screenshot-ore-scanner-bell.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Plugin/raw/main/images/screenshot-ore-scanner-bell.png" alt="Ore Scanner Bell" width="450"></a></td>
   </tr>
   <tr>
     <th>Power Mining - Magnet Hopper Gold Pickup</th>
     <th>Power Mining - Ore Bell Custom Filter</th>
   </tr>
   <tr>
-    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-magnet-hopper.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-magnet-hopper.png" alt="Magnet Hopper Gold Collection" width="450"></a></td>
-    <td><a href="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-ore-bell-config.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Tools/raw/main/images/screenshot-ore-bell-config.png" alt="Ore Bell Custom Filter" width="450"></a></td>
+    <td><a href="https://github.com/Cobbleworks/Power-Mining-Plugin/raw/main/images/screenshot-magnet-hopper.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Plugin/raw/main/images/screenshot-magnet-hopper.png" alt="Magnet Hopper Gold Collection" width="450"></a></td>
+    <td><a href="https://github.com/Cobbleworks/Power-Mining-Plugin/raw/main/images/screenshot-ore-bell-config.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/Cobbleworks/Power-Mining-Plugin/raw/main/images/screenshot-ore-bell-config.png" alt="Ore Bell Custom Filter" width="450"></a></td>
   </tr>
 </table>
