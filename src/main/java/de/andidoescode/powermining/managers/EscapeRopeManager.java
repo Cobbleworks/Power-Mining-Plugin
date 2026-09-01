@@ -23,6 +23,9 @@ import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Arrays;
 
+/**
+ * Finds a safe surface destination before consuming an escape-rope item.
+ */
 public class EscapeRopeManager implements Listener {
 
     private final PowerMining plugin;

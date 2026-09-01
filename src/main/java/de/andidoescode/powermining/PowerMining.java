@@ -5,6 +5,9 @@ import de.andidoescode.powermining.listeners.MountedMiningListener;
 import de.andidoescode.powermining.managers.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
+/**
+ * Registers the independent mining tools and their shared command entry point.
+ */
 public class PowerMining extends JavaPlugin {
 
     private static PowerMining instance;

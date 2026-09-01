@@ -28,6 +28,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Pulls nearby item entities toward registered hoppers within configured limits.
+ */
 public class MagnetHopperManager implements Listener {
 
     private final PowerMining plugin;

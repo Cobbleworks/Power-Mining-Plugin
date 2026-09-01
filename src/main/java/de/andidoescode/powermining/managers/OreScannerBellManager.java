@@ -31,6 +31,9 @@ import org.joml.Vector3f;
 
 import java.util.*;
 
+/**
+ * Scans a bounded area and renders temporary indicators for matching ores.
+ */
 public class OreScannerBellManager implements Listener {
 
     private final PowerMining plugin;

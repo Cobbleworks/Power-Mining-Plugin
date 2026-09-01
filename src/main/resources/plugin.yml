@@ -3,8 +3,8 @@ version: ${project.version}
 main: de.andidoescode.powermining.PowerMining
 api-version: "1.21"
 description: Enhanced mining experience with mounted mining, magnet hoppers, and ore scanner bells
-author: AndiDoesCode
-website: https://github.com/andidoescode/power-mining
+authors: [AndiDoesCode, Cobbleworks]
+website: https://github.com/Cobbleworks/Power-Mining-Plugin
 
 commands:
   powermining:
