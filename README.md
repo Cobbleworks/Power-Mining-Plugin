@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="images/plugin-logo.png" alt="Power Mining Plugin" width="180" />
+  <img src="images/plugin-logo.png" alt="Power Mining Plugin" width="200" height="200" />
 </p>
 <h1 align="center">Power Mining Plugin</h1>
 <p align="center">
@@ -7,7 +7,7 @@
   <b>Mounted mining, utility tools, structure tracking, ore scanning, and auto-smelting.</b>
 </p>
 <p align="center">
-  <a href="https://github.com/Cobbleworks/Power-Mining-Plugin/releases"><img src="https://img.shields.io/github/v/release/Cobbleworks/Power-Mining-Plugin?include_prereleases&style=flat-square&color=4CAF50" alt="Latest Release"></a>&nbsp;&nbsp;<a href="https://github.com/Cobbleworks/Power-Mining-Plugin/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License"></a>&nbsp;&nbsp;<img src="https://img.shields.io/badge/Java-17+-orange?style=flat-square" alt="Java Version">&nbsp;&nbsp;<img src="https://img.shields.io/badge/Minecraft-1.21+-green?style=flat-square" alt="Minecraft Version">&nbsp;&nbsp;<img src="https://img.shields.io/badge/Platform-Spigot%2FPaper-yellow?style=flat-square" alt="Platform">&nbsp;&nbsp;<img src="https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square" alt="Status">&nbsp;&nbsp;<a href="https://github.com/Cobbleworks/Power-Mining-Plugin/issues"><img src="https://img.shields.io/github/issues/Cobbleworks/Power-Mining-Plugin?style=flat-square&color=orange" alt="Open Issues"></a>
+  <a href="https://github.com/Cobbleworks/Power-Mining-Plugin/releases"><img src="https://img.shields.io/github/v/release/Cobbleworks/Power-Mining-Plugin?include_prereleases&style=flat-square&color=4CAF50" alt="Latest Release"></a>&nbsp;&nbsp;<a href="https://github.com/Cobbleworks/Power-Mining-Plugin/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License"></a>&nbsp;&nbsp;<img src="https://img.shields.io/badge/Java-21+-orange?style=flat-square" alt="Java Version">&nbsp;&nbsp;<img src="https://img.shields.io/badge/Minecraft-1.21+-green?style=flat-square" alt="Minecraft Version">&nbsp;&nbsp;<img src="https://img.shields.io/badge/Platform-Spigot%2FPaper-yellow?style=flat-square" alt="Platform">&nbsp;&nbsp;<img src="https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square" alt="Status">&nbsp;&nbsp;<a href="https://github.com/Cobbleworks/Power-Mining-Plugin/issues"><img src="https://img.shields.io/github/issues/Cobbleworks/Power-Mining-Plugin?style=flat-square&color=orange" alt="Open Issues"></a>
 </p>
 
 Power Mining is an open-source Minecraft plugin that provides a set of mining utility items and mounted mining mechanics. Items are given through `/powermining` subcommands and carry per-item metadata (radius, filter, duration, mode) using persistent data. The plugin includes automated mounted mining, magnetic item collection hoppers, placeable ore scanner bells, wearables for night vision and ore highlighting, return-point teleport ropes, structure-tracking compasses, and an auto-smelting pickaxe.
@@ -27,7 +27,7 @@ Power Mining is an open-source Minecraft plugin that provides a set of mining ut
 
 - **Server Software:** `Spigot`, `Paper`, `Purpur`, `CraftBukkit`
 - **Minecraft Versions:** `1.21` and higher
-- **Java Requirements:** `Java 17+`
+- **Java Requirements:** `Java 21+`
 - **Dependencies:** None - fully self-contained, no external plugins required
 
 ## **Table of Contents**
@@ -37,9 +37,10 @@ Power Mining is an open-source Minecraft plugin that provides a set of mining ut
     - [Installation Steps](#installation-steps)
     - [First Launch & Configuration](#first-launch--configuration)
     - [Verifying Installation](#verifying-installation)
-2. [Configuration](#configuration)
+2. [Third-Party Plugins](#third-party-plugins)
+3. [Configuration](#configuration)
     - [config.yml Reference](#configyml-reference)
-3. [How It Works](#how-it-works)
+4. [How It Works](#how-it-works)
     - [Mounted Mining](#mounted-mining)
     - [Magnet Hopper](#magnet-hopper)
     - [Ore Scanner Bell](#ore-scanner-bell)
@@ -47,12 +48,12 @@ Power Mining is an open-source Minecraft plugin that provides a set of mining ut
     - [Cave Compass](#cave-compass)
     - [Smelter's Pickaxe](#smelters-pickaxe)
     - [Miner's Goggles & Helmet](#miners-goggles--helmet)
-4. [Player Commands](#player-commands)
+5. [Player Commands](#player-commands)
     - [Command Reference](#command-reference)
-5. [Permissions](#permissions)
-6. [Building from Source](#building-from-source)
-7. [License](#license)
-8. [Screenshots](#screenshots)
+6. [Permissions](#permissions)
+7. [Building from Source](#building-from-source)
+8. [License](#license)
+9. [Screenshots](#screenshots)
 
 ## **Getting Started**
 
@@ -62,7 +63,7 @@ Before installing Power Mining, confirm the following requirements are met:
 
 - A Minecraft server running **Spigot**, **Paper**, **Purpur**, or any compatible fork
 - Server version **1.21 or higher** (`api-version: 1.21` is the minimum)
-- **Java 17** or newer installed on the machine running the server
+- **Java 21** or newer installed on the machine running the server
 - Operator or console access to install plugin files
 
 No additional plugins or libraries are needed. Power Mining has zero external dependencies.
@@ -92,6 +93,10 @@ All tools are available immediately after installation using `/powermining` comm
 - Run `/version PowerMining` to confirm the installed version matches the release you downloaded
 - Run `/pm helmet` to give yourself a Miner's Helmet and equip it - night vision should apply
 - If the plugin fails to load, check the server console for `PowerMining` error messages (common causes: wrong Java version, corrupt JAR, or unsupported API version)
+
+## **Third-Party Plugins**
+
+None. Power Mining is self-contained and uses only the Bukkit server API.
 
 ## **Configuration**
 
@@ -228,7 +233,7 @@ All commands require the corresponding `powermining.give.*` permission (operator
 Power Mining uses **Apache Maven** as its build system. The plugin is packaged as a standard JAR with no external runtime dependencies.
 
 **Requirements:**
-- Java 17 or newer
+- Java 21 or newer
 - Apache Maven 3.6 or newer
 
 **Steps:**
