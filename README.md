@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="images/plugin-logo.png" alt="Power Mining Plugin" width="200" height="200" />
+  <img src="images/plugin-banner.png" alt="Cobbleworks - Power Mining Plugin banner" width="818" />
 </p>
-<h1 align="center">Power Mining Plugin</h1>
+<h1 align="center">Cobbleworks - Power Mining Plugin</h1>
 <p align="center">
-  <b>Mining enhancements for Minecraft servers.</b><br>
-  <b>Mounted mining, utility tools, structure tracking, ore scanning, and auto-smelting.</b>
+  <b>Expand survival mining with mounted excavation and a focused collection of utility equipment.</b><br>
+  <b>Scan for ore, collect drops, track structures, escape caves, see underground, and smelt while mining.</b>
 </p>
 <p align="center">
   <a href="https://github.com/Cobbleworks/Power-Mining-Plugin/releases"><img src="https://img.shields.io/github/v/release/Cobbleworks/Power-Mining-Plugin?include_prereleases&style=flat-square&color=4CAF50" alt="Latest Release"></a>&nbsp;&nbsp;<a href="https://github.com/Cobbleworks/Power-Mining-Plugin/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License"></a>&nbsp;&nbsp;<img src="https://img.shields.io/badge/Java-21+-orange?style=flat-square" alt="Java Version">&nbsp;&nbsp;<img src="https://img.shields.io/badge/Minecraft-1.21+-green?style=flat-square" alt="Minecraft Version">&nbsp;&nbsp;<img src="https://img.shields.io/badge/Platform-Spigot%2FPaper-yellow?style=flat-square" alt="Platform">&nbsp;&nbsp;<img src="https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square" alt="Status">&nbsp;&nbsp;<a href="https://github.com/Cobbleworks/Power-Mining-Plugin/issues"><img src="https://img.shields.io/github/issues/Cobbleworks/Power-Mining-Plugin?style=flat-square&color=orange" alt="Open Issues"></a>
@@ -12,7 +12,7 @@
 
 Power Mining is an open-source Minecraft plugin that provides a set of mining utility items and mounted mining mechanics. Items are given through `/powermining` subcommands and carry per-item metadata (radius, filter, duration, mode) using persistent data. The plugin includes automated mounted mining, magnetic item collection hoppers, placeable ore scanner bells, wearables for night vision and ore highlighting, return-point teleport ropes, structure-tracking compasses, and an auto-smelting pickaxe.
 
-### **Core Features**
+## **Core Features**
 
 - **Mounted Mining Drill:** While riding an `AbstractHorse` and holding a pickaxe, mines a configurable cuboid ahead of the mount at a configurable interval
 - **Magnet Hopper:** Custom hopper item pulls nearby dropped items toward itself on a repeating task
@@ -23,7 +23,7 @@ Power Mining is an open-source Minecraft plugin that provides a set of mining ut
 - **Smelter's Pickaxe:** Custom golden pickaxe replaces ore/block drops with smelted outputs and supports fortune-style bonus logic
 - **Miner's Goggles:** Custom leather helmet highlights nearby ores with optional filter and radius metadata
 
-### **Supported Platforms**
+## **Supported Platforms**
 
 - **Server Software:** `Spigot`, `Paper`, `Purpur`, `CraftBukkit`
 - **Minecraft Versions:** `1.21` and higher
@@ -32,15 +32,17 @@ Power Mining is an open-source Minecraft plugin that provides a set of mining ut
 
 ## **Table of Contents**
 
-1. [Getting Started](#getting-started)
+1. [Core Features](#core-features)
+2. [Supported Platforms](#supported-platforms)
+3. [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Installation Steps](#installation-steps)
     - [First Launch & Configuration](#first-launch--configuration)
     - [Verifying Installation](#verifying-installation)
-2. [Third-Party Plugins](#third-party-plugins)
-3. [Configuration](#configuration)
+4. [Third-Party Plugins](#third-party-plugins)
+5. [Configuration](#configuration)
     - [config.yml Reference](#configyml-reference)
-4. [How It Works](#how-it-works)
+6. [How It Works](#how-it-works)
     - [Mounted Mining](#mounted-mining)
     - [Magnet Hopper](#magnet-hopper)
     - [Ore Scanner Bell](#ore-scanner-bell)
@@ -48,12 +50,12 @@ Power Mining is an open-source Minecraft plugin that provides a set of mining ut
     - [Cave Compass](#cave-compass)
     - [Smelter's Pickaxe](#smelters-pickaxe)
     - [Miner's Goggles & Helmet](#miners-goggles--helmet)
-5. [Player Commands](#player-commands)
+7. [Player Commands](#player-commands)
     - [Command Reference](#command-reference)
-6. [Permissions](#permissions)
-7. [Building from Source](#building-from-source)
-8. [License](#license)
-9. [Screenshots](#screenshots)
+8. [Permissions](#permissions)
+9. [Building from Source](#building-from-source)
+10. [License](#license)
+11. [Screenshots](#screenshots)
 
 ## **Getting Started**
 
