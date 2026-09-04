@@ -82,6 +82,16 @@ cave-compass:
 auto-smelter-pickaxe:
   enabled: true
 
+# Dungeon Locator Settings
+dungeon-locator:
+  enabled: true
+  # Searches only chunks that are already loaded; the scan never generates terrain.
+  default-radius: 32
+  max-radius: 48
+  cooldown-seconds: 15
+  # Duration of the player-only glowing spawner marker (20 ticks = 1 second).
+  marker-duration-ticks: 200
+
 # Miner's Goggles Settings
 miners-goggles:
   enabled: true

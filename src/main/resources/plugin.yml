@@ -2,14 +2,14 @@ name: PowerMining
 version: ${project.version}
 main: de.andidoescode.powermining.PowerMining
 api-version: "1.21"
-description: Enhanced mining experience with mounted mining, magnet hoppers, and ore scanner bells
+description: Mining utilities, automation tools, ore scanners, and dungeon locating
 authors: [AndiDoesCode, Cobbleworks]
 website: https://github.com/Cobbleworks/Power-Mining-Plugin
 
 commands:
   powermining:
     description: Power Mining main command
-    usage: /powermining <magnethopper|orebell|drill> [args...]
+    usage: /powermining <magnethopper|orebell|dungeonlocator|drill> [args...]
     permission: powermining.use
     aliases: [pm]
 
@@ -34,6 +34,7 @@ permissions:
       powermining.use.instantladder: true
       powermining.use.autosmelterpickaxe: true
       powermining.use.minersgoggles: true
+      powermining.use.dungeonlocator: true
   powermining.use.mountedmining:
     description: Use mounted mining feature
     default: true
@@ -64,6 +65,9 @@ permissions:
   powermining.use.minersgoggles:
     description: Use miner's goggles feature
     default: true
+  powermining.use.dungeonlocator:
+    description: Use dungeon locators to find nearby mob spawners
+    default: true
   powermining.give.*:
     description: Give Power Mining items
     default: op
@@ -77,6 +81,7 @@ permissions:
       powermining.give.instantladder: true
       powermining.give.smelterpickaxe: true
       powermining.give.minersgoggles: true
+      powermining.give.dungeonlocator: true
   powermining.give.magnethopper:
     description: Give magnet hoppers
     default: op
@@ -103,4 +108,7 @@ permissions:
     default: op
   powermining.give.minersgoggles:
     description: Give miner's goggles
+    default: op
+  powermining.give.dungeonlocator:
+    description: Give dungeon locators
     default: op

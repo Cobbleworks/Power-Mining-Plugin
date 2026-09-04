@@ -46,6 +46,7 @@ public class PowerMiningCommand implements CommandExecutor, TabCompleter {
             case "cavecompass", "compass", "cc" -> handleCaveCompass(sender, subArgs);
             case "smelterpick", "smelter", "sp" -> handleSmelterPickaxe(sender, subArgs);
             case "goggles", "minersgoggles", "mg" -> handleMinersGoggles(sender, subArgs);
+            case "dungeonlocator", "dungeon", "dl" -> handleDungeonLocator(sender, subArgs);
             case "drill" -> handleDrill(sender);
             case "help" -> {
                 sendHelp(sender);
@@ -112,6 +113,13 @@ public class PowerMiningCommand implements CommandExecutor, TabCompleter {
             .append(Component.text("[player] [radius] [--filter ORE]")
                 .color(NamedTextColor.GRAY))
             .append(Component.text(" - Give Miner's Goggles")
+                .color(NamedTextColor.WHITE)));
+
+        sender.sendMessage(Component.text("/pm dungeonlocator ")
+            .color(NamedTextColor.YELLOW)
+            .append(Component.text("[player] [radius]")
+                .color(NamedTextColor.GRAY))
+            .append(Component.text(" - Give a Dungeon Locator")
                 .color(NamedTextColor.WHITE)));
         
         sender.sendMessage(Component.text("/pm drill")
@@ -508,6 +516,52 @@ public class PowerMiningCommand implements CommandExecutor, TabCompleter {
         return true;
     }
 
+    private boolean handleDungeonLocator(CommandSender sender, String[] args) {
+        if (!sender.hasPermission("powermining.give.dungeonlocator")) {
+            sender.sendMessage(Component.text("You do not have permission to do that.", NamedTextColor.RED));
+            return true;
+        }
+
+        Player target;
+        if (args.length == 0) {
+            if (!(sender instanceof Player player)) {
+                sender.sendMessage(Component.text("Console must specify a player.", NamedTextColor.RED));
+                return true;
+            }
+            target = player;
+        } else {
+            target = Bukkit.getPlayerExact(args[0]);
+            if (target == null) {
+                sender.sendMessage(Component.text("Player not found: " + args[0], NamedTextColor.RED));
+                return true;
+            }
+        }
+
+        int radius = plugin.getConfig().getInt("dungeon-locator.default-radius", 32);
+        if (args.length >= 2) {
+            try {
+                radius = Integer.parseInt(args[1]);
+            } catch (NumberFormatException exception) {
+                sender.sendMessage(Component.text("Radius must be a whole number.", NamedTextColor.RED));
+                return true;
+            }
+        }
+        int maxRadius = plugin.getConfig().getInt("dungeon-locator.max-radius", 48);
+        if (radius < 1 || radius > maxRadius) {
+            sender.sendMessage(Component.text("Radius must be between 1 and " + maxRadius + ".", NamedTextColor.RED));
+            return true;
+        }
+
+        var leftovers = target.getInventory().addItem(plugin.getDungeonLocatorManager().createDungeonLocator(radius));
+        leftovers.values().forEach(item -> target.getWorld().dropItemNaturally(target.getLocation(), item));
+        target.sendMessage(Component.text("You received a Dungeon Locator with a " + radius + " block radius.",
+                NamedTextColor.GREEN));
+        if (sender != target) {
+            sender.sendMessage(Component.text("Gave a Dungeon Locator to " + target.getName() + ".", NamedTextColor.GREEN));
+        }
+        return true;
+    }
+
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         List<String> completions = new ArrayList<>();
@@ -515,7 +569,7 @@ public class PowerMiningCommand implements CommandExecutor, TabCompleter {
         if (args.length == 1) {
             String partial = args[0].toLowerCase();
             List<String> subCommands = Arrays.asList("magnethopper", "orebell", "helmet", "escaperope", 
-                    "cavecompass", "smelterpick", "goggles", "drill", "help");
+                    "cavecompass", "smelterpick", "goggles", "dungeonlocator", "drill", "help");
             completions = subCommands.stream()
                 .filter(cmd -> cmd.startsWith(partial))
                 .collect(Collectors.toList());
@@ -527,6 +581,7 @@ public class PowerMiningCommand implements CommandExecutor, TabCompleter {
                 subCommand.equals("escaperope") || subCommand.equals("rope") || subCommand.equals("er") ||
                 subCommand.equals("cavecompass") || subCommand.equals("compass") || subCommand.equals("cc") ||
                 subCommand.equals("smelterpick") || subCommand.equals("smelter") || subCommand.equals("sp") ||
+                subCommand.equals("dungeonlocator") || subCommand.equals("dungeon") || subCommand.equals("dl") ||
                 subCommand.equals("goggles") || subCommand.equals("minersgoggles") || subCommand.equals("mg")) {
                 String partial = args[1].toLowerCase();
                 completions = Bukkit.getOnlinePlayers().stream()
@@ -542,6 +597,8 @@ public class PowerMiningCommand implements CommandExecutor, TabCompleter {
                 completions.addAll(Arrays.asList("16", "32", "48", "64"));
             } else if (subCommand.equals("goggles") || subCommand.equals("minersgoggles") || subCommand.equals("mg")) {
                 completions.addAll(Arrays.asList("5", "10", "15", "20"));
+            } else if (subCommand.equals("dungeonlocator") || subCommand.equals("dungeon") || subCommand.equals("dl")) {
+                completions.addAll(Arrays.asList("16", "24", "32", "48"));
             }
         } else if (args.length >= 4) {
             String subCommand = args[0].toLowerCase();

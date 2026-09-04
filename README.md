@@ -10,7 +10,7 @@
   <a href="https://github.com/Cobbleworks/Power-Mining-Plugin/releases"><img src="https://img.shields.io/github/v/release/Cobbleworks/Power-Mining-Plugin?include_prereleases&style=flat-square&color=4CAF50" alt="Latest Release"></a>&nbsp;&nbsp;<a href="https://github.com/Cobbleworks/Power-Mining-Plugin/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License"></a>&nbsp;&nbsp;<img src="https://img.shields.io/badge/Java-21+-orange?style=flat-square" alt="Java Version">&nbsp;&nbsp;<img src="https://img.shields.io/badge/Minecraft-1.21+-green?style=flat-square" alt="Minecraft Version">&nbsp;&nbsp;<img src="https://img.shields.io/badge/Platform-Spigot%2FPaper-yellow?style=flat-square" alt="Platform">&nbsp;&nbsp;<img src="https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square" alt="Status">&nbsp;&nbsp;<a href="https://github.com/Cobbleworks/Power-Mining-Plugin/issues"><img src="https://img.shields.io/github/issues/Cobbleworks/Power-Mining-Plugin?style=flat-square&color=orange" alt="Open Issues"></a>
 </p>
 
-Power Mining is an open-source Minecraft plugin that provides a set of mining utility items and mounted mining mechanics. Items are given through `/powermining` subcommands and carry per-item metadata (radius, filter, duration, mode) using persistent data. The plugin includes automated mounted mining, magnetic item collection hoppers, placeable ore scanner bells, wearables for night vision and ore highlighting, return-point teleport ropes, structure-tracking compasses, and an auto-smelting pickaxe.
+Power Mining is an open-source Minecraft plugin that provides a set of mining utility items and mounted mining mechanics. Items are given through `/powermining` subcommands and carry per-item metadata (radius, filter, duration, mode) using persistent data. The plugin includes automated mounted mining, magnetic item collection hoppers, ore and spawner detection, wearables for underground visibility, return-point teleport ropes, structure-tracking compasses, and an auto-smelting pickaxe.
 
 ## **Core Features**
 
@@ -22,6 +22,7 @@ Power Mining is an open-source Minecraft plugin that provides a set of mining ut
 - **Cave Compass:** Custom compass cycles structure targets and updates lodestone target to located structures
 - **Smelter's Pickaxe:** Custom golden pickaxe replaces ore/block drops with smelted outputs and supports fortune-style bonus logic
 - **Miner's Goggles:** Custom leather helmet highlights nearby ores with optional filter and radius metadata
+- **Dungeon Locator:** Recovery compass scans loaded terrain for the nearest mob spawner, points to it, and shows the player a temporary through-wall marker
 
 ## **Supported Platforms**
 
@@ -48,6 +49,7 @@ Power Mining is an open-source Minecraft plugin that provides a set of mining ut
     - [Ore Scanner Bell](#ore-scanner-bell)
     - [Escape Rope](#escape-rope)
     - [Cave Compass](#cave-compass)
+    - [Dungeon Locator](#dungeon-locator)
     - [Smelter's Pickaxe](#smelters-pickaxe)
     - [Miner's Goggles & Helmet](#miners-goggles--helmet)
 7. [Player Commands](#player-commands)
@@ -133,6 +135,11 @@ All settings are in `plugins/PowerMining/config.yml`.
 | `escape-rope.enabled` | `true` | Enable escape rope functionality |
 | `cave-compass.enabled` | `true` | Enable cave compass functionality |
 | `cave-compass.search-radius` | `5000` | Structure search radius |
+| `dungeon-locator.enabled` | `true` | Enable the mob-spawner locator |
+| `dungeon-locator.default-radius` | `32` | Default spherical search radius |
+| `dungeon-locator.max-radius` | `48` | Maximum radius accepted by the give command |
+| `dungeon-locator.cooldown-seconds` | `15` | Per-player delay between scans |
+| `dungeon-locator.marker-duration-ticks` | `200` | Duration of the player-only glowing spawner marker |
 | `auto-smelter-pickaxe.enabled` | `true` | Enable smelter pickaxe functionality |
 | `miners-goggles.enabled` | `true` | Enable miner's goggles functionality |
 | `miners-goggles.default-radius` | `10` | Default goggles radius |
@@ -165,6 +172,12 @@ The Escape Rope is a custom lead item. Right-clicking a block saves that block's
 
 The Cave Compass is a custom compass that locates Minecraft structures. Sneak-clicking cycles through a list of structure types. On each cycle, the plugin searches for the nearest structure of the selected type within `search-radius` blocks and updates the compass's lodestone target to that location. The compass always points toward the currently targeted structure. Structure results are cached to avoid repeated expensive searches.
 
+### **Dungeon Locator**
+
+[Monster rooms](https://minecraft.wiki/w/Monster_Room) are world-generation features built around a mob spawner rather than structures supported by Minecraft's normal structure-locate API. The Dungeon Locator therefore searches for `SPAWNER` blocks in already loaded chunks within a spherical radius. It also finds spawners from other structures, and it does not generate or force-load unexplored terrain.
+
+Right-clicking the custom recovery compass captures immutable snapshots of the nearby loaded chunks on the server thread, scans those snapshots asynchronously, and points the compass at the nearest result. A glowing spawner outline is shown only to the player who performed the scan for `marker-duration-ticks`. The compass retains its last target after the marker disappears and across restarts.
+
 ### **Smelter's Pickaxe**
 
 The Smelter's Pickaxe is a custom golden pickaxe that intercepts block break drops for a mapped set of blocks (iron ore, gold ore, copper ore, ancient debris, cobblestone, sand, clay, etc.) and replaces the raw drop with the smelted equivalent. Fortune bonus logic is applied - higher Fortune levels increase the quantity of smelted output using a similar formula to vanilla Fortune on ores.
@@ -194,6 +207,7 @@ All commands require the corresponding `powermining.give.*` permission (operator
 | `/pm cavecompass [player]` | Give a Cave Compass |
 | `/pm smelterpick [player]` | Give a Smelter's Pickaxe |
 | `/pm goggles [player] [radius] [--filter ORE]` | Give Miner's Goggles with optional radius and filter |
+| `/pm dungeonlocator [player] [radius]` | Give a Dungeon Locator that marks the nearest loaded mob spawner |
 
 **Subcommand aliases:**
 
@@ -206,6 +220,7 @@ All commands require the corresponding `powermining.give.*` permission (operator
 | `cavecompass` | `compass`, `cc` |
 | `smelterpick` | `smelter`, `sp` |
 | `goggles` | `minersgoggles`, `mg` |
+| `dungeonlocator` | `dungeon`, `dl` |
 
 ## **Permissions**
 
@@ -222,6 +237,7 @@ All commands require the corresponding `powermining.give.*` permission (operator
 | `powermining.use.cavecompass` | Use cave compass | `true` |
 | `powermining.use.autosmelterpickaxe` | Use smelter pickaxe | `true` |
 | `powermining.use.minersgoggles` | Use miner's goggles | `true` |
+| `powermining.use.dungeonlocator` | Scan for and mark nearby mob spawners | `true` |
 | `powermining.give.magnethopper` | Give magnet hopper | `op` |
 | `powermining.give.orescannerbell` | Give ore scanner bell | `op` |
 | `powermining.give.minershelmet` | Give miner's helmet | `op` |
@@ -229,6 +245,7 @@ All commands require the corresponding `powermining.give.*` permission (operator
 | `powermining.give.cavecompass` | Give cave compass | `op` |
 | `powermining.give.smelterpickaxe` | Give smelter pickaxe | `op` |
 | `powermining.give.minersgoggles` | Give miner's goggles | `op` |
+| `powermining.give.dungeonlocator` | Give dungeon locators | `op` |
 
 ## **Building from Source**
 
@@ -264,6 +281,7 @@ src/main/
 │   └── managers/
 │       ├── AutoSmelterPickaxeManager.java     - Smelter pickaxe drop replacement
 │       ├── CaveCompassManager.java            - Structure tracking and lodestone updates
+│       ├── DungeonLocatorManager.java          - Async loaded-chunk spawner detection and marking
 │       ├── EscapeRopeManager.java             - Return point storage and teleport logic
 │       ├── MagnetHopperManager.java           - Item attraction task and hopper tracking
 │       ├── MinersGogglesManager.java          - Ore highlighting task for goggles

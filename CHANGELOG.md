@@ -6,6 +6,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+
+- Added a persistent Dungeon Locator recovery compass for finding the nearest mob spawner in loaded terrain.
+- Added `/pm dungeonlocator [player] [radius]` with `dungeon` and `dl` aliases.
+- Added player-only glowing spawner markers and a retained compass target.
+- Added configurable radius limits, cooldowns, marker duration, and dedicated use/give permissions.
+
+### Performance
+
+- Dungeon scans capture loaded chunk snapshots on the server thread and search the immutable data asynchronously.
+
+### Security
+
+- The locator never generates or force-loads unexplored chunks.
+- Locator radius data is clamped to the configured maximum, and an unloaded result chunk is never synchronously reloaded just to create a marker.
+
 ## [1.0.0] - 2026-04-28
 
 Power Mining Tools v1.0.0 is the initial release, delivering eight custom mining utility items covering mounted drilling, ore detection, item magnetism, auto-smelting, structure tracking, and night vision.

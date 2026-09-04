@@ -19,6 +19,7 @@ public class PowerMining extends JavaPlugin {
     private CaveCompassManager caveCompassManager;
     private AutoSmelterPickaxeManager autoSmelterPickaxeManager;
     private MinersGogglesManager minersGogglesManager;
+    private DungeonLocatorManager dungeonLocatorManager;
 
     @Override
     public void onEnable() {
@@ -33,6 +34,7 @@ public class PowerMining extends JavaPlugin {
         caveCompassManager = new CaveCompassManager(this);
         autoSmelterPickaxeManager = new AutoSmelterPickaxeManager(this);
         minersGogglesManager = new MinersGogglesManager(this);
+        dungeonLocatorManager = new DungeonLocatorManager(this);
         
         registerListeners();
         registerCommands();
@@ -63,6 +65,9 @@ public class PowerMining extends JavaPlugin {
         if (minersGogglesManager != null) {
             minersGogglesManager.shutdown();
         }
+        if (dungeonLocatorManager != null) {
+            dungeonLocatorManager.shutdown();
+        }
         
         getLogger().info("Power Mining has been disabled!");
     }
@@ -76,6 +81,7 @@ public class PowerMining extends JavaPlugin {
         getServer().getPluginManager().registerEvents(caveCompassManager, this);
         getServer().getPluginManager().registerEvents(autoSmelterPickaxeManager, this);
         getServer().getPluginManager().registerEvents(minersGogglesManager, this);
+        getServer().getPluginManager().registerEvents(dungeonLocatorManager, this);
     }
 
     private void registerCommands() {
@@ -117,5 +123,9 @@ public class PowerMining extends JavaPlugin {
 
     public MinersGogglesManager getMinersGogglesManager() {
         return minersGogglesManager;
+    }
+
+    public DungeonLocatorManager getDungeonLocatorManager() {
+        return dungeonLocatorManager;
     }
 }
